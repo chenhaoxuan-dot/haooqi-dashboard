@@ -1396,6 +1396,13 @@
 </div>
 
 <script>
+
+// 全局变量初始化
+const dailyOverall = RAW_DATA.dailyOverall;
+const intentData = RAW_DATA.intentData;
+const platformData = RAW_DATA.platformData;
+const intentCategories = RAW_DATA.intentCategories;
+
 // 全局错误捕获
 window.onerror = function(msg, url, line, col, err) {
   var el = document.getElementById('page-loading');
