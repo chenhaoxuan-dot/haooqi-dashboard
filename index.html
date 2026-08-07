@@ -1471,32 +1471,32 @@ function generate125Intents() {
     const pkeys = Object.keys(copy.platforms);
     const avgBrand = pkeys.reduce((s, p) => s + copy.platforms[p].品牌提及率, 0) / pkeys.length;
     const avgZZ = pkeys.reduce((s, p) => s + copy.platforms[p].中正率, 0) / pkeys.length;
-    copy.dailyBrand = copy.daily.map((zz, i) => {
+    dailyOverallBrand = dailyOverall.map((zz, i) => {
       // 品牌提及率波动幅度约为中正率波动的 0.3 倍（品牌提及率更稳定）
       const zzDelta = zz - avgZZ;
       const brandDelta = zzDelta * 0.3 + (Math.sin(i * 1.1 + avgBrand * 0.1) * 0.8);
       return Math.max(20, Math.min(99, avgBrand + brandDelta));
     });
     // 为原始 20 条生成按平台分日数据（支撑平台筛选下的分日趋势）
-    copy.dailyByPlatform = {};
-    copy.dailyBrandByPlatform = {};
+    dailyOverallByPlatform = {};
+    dailyOverallBrandByPlatform = {};
     pkeys.forEach(pname => {
       const platZZ = copy.platforms[pname].中正率;
       const platBrand = copy.platforms[pname].品牌提及率;
       // 以整体 daily 为基准，叠加平台偏移量，生成该平台的分日趋势
       const offset = platZZ - avgZZ;
-      const platDaily = copy.daily.map(zz => {
+      const platDaily = dailyOverall.map(zz => {
         if (zz == null) return null;
         return Math.max(15, Math.min(100, zz + offset));
       });
-      copy.dailyByPlatform[pname] = platDaily;
+      dailyOverallByPlatform[pname] = platDaily;
       // 品牌提及率分日：以该平台品牌提及率为基准，跟随中正率波动
       const brandOffset = platBrand - avgBrand;
-      const platDailyBrand = copy.dailyBrand.map(b => {
+      const platDailyBrand = dailyOverallBrand.map(b => {
         if (b == null) return null;
         return Math.max(20, Math.min(99, b + brandOffset));
       });
-      copy.dailyBrandByPlatform[pname] = platDailyBrand;
+      dailyOverallBrandByPlatform[pname] = platDailyBrand;
     });
     result.push(copy);
   });
