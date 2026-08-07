@@ -21,2662 +21,676 @@
     --ink-4: #9AA0AB;
 
     /* 语义色 —— 中正=墨绿，风险=朱红，中性=赭石 */
-    --good: #2E7D5B;
-    --good-soft: #E5F0EA;
-    --good-light: #D4E6DD;
-    --risk: #C24A3A;
-    --risk-soft: #F7E5E1;
-    --risk-light: #EFCFC9;
-    --warn: #C88A2E;
-    --warn-soft: #F5E9D4;
-
-    /* 分类色 —— 4 个意图类别，低饱和区分度 */
-    --cat-brand: #2D5E8A;
-    --cat-category: #8B5E3C;
-    --cat-forest: #3E7B62;
-    --cat-competitor: #7A4F73;
-
-    /* 线条 */
-    --line: #E2DED4;
-    --line-strong: #CFC9BC;
-
-    /* 排版 */
-    --font-sans: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
-    --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
-
-    /* 间距 */
-    --gap: 16px;
-    --gap-lg: 24px;
+    --success: #2E7D32;
+    --warning: #ED6C30;
+    --danger: #D32F2F;
+    --neutral: #8B6F4E;
+    --primary: #165DFF;
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    font-family: var(--font-sans);
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
     background: var(--bg);
-    color: var(--ink-1);
-    font-size: 14px;
+    color: var(--ink-2);
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
   }
-
-  .dashboard {
+  .container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 24px 28px 40px;
+    padding: 24px;
   }
-
-  /* ========== 顶部标题栏 ========== */
   .header {
     display: flex;
-    align-items: flex-end;
     justify-content: space-between;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--line-strong);
-    margin-bottom: 20px;
-    gap: 24px;
-    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 32px;
   }
-
   .header-left {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 16px;
   }
-
-  .brand-mark {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: var(--ink-1);
+  .header-left .logo {
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    color: white;
+    font-size: 24px;
   }
-
-  .brand-mark svg {
-    width: 24px;
-    height: 24px;
-    stroke: #F5F3EE;
-    fill: none;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .title-block h1 {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
+  .header-title h1 {
+    font-size: 24px;
+    font-weight: 600;
     color: var(--ink-1);
-    margin-bottom: 2px;
   }
-
-  .title-block .subtitle {
-    font-size: 12.5px;
+  .header-title p {
+    font-size: 14px;
     color: var(--ink-3);
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
-
-  .subtitle .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--ink-4);
-  }
-
   .header-right {
     display: flex;
-    align-items: center;
     gap: 12px;
-    flex-wrap: wrap;
   }
-
-  .meta-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
+  .btn {
+    padding: 8px 16px;
+    border: 1px solid var(--bg-soft);
     border-radius: 6px;
-    font-size: 12px;
+    background: var(--bg-card);
     color: var(--ink-2);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .meta-chip strong {
-    color: var(--ink-1);
-    font-weight: 600;
-  }
-
-  .date-range {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    background: var(--ink-1);
-    color: #F5F3EE;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .date-range svg {
-    width: 14px;
-    height: 14px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-  }
-
-  /* ========== 时间选择器 ========== */
-  .time-filter {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 4px;
-  }
-
-  .time-filter-btn {
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink-3);
-    background: transparent;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: inherit;
-  }
-
-  .time-filter-btn:hover {
-    color: var(--ink-1);
-    background: var(--bg-soft);
-  }
-
-  .time-filter-btn.active {
-    color: #fff;
-    background: var(--ink-1);
-  }
-
-  .time-filter-divider {
-    width: 1px;
-    height: 16px;
-    background: var(--line);
-    margin: 0 2px;
-  }
-
-  .time-custom {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 8px;
-  }
-
-  .time-custom input[type="date"] {
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 3px 6px;
-    font-size: 11.5px;
-    font-family: var(--font-mono);
-    color: var(--ink-2);
-    background: var(--bg-elev);
-    cursor: pointer;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .time-custom input[type="date"]:focus {
-    outline: none;
-    border-color: var(--ink-3);
-  }
-
-  .time-custom .dash {
-    color: var(--ink-4);
-    font-size: 12px;
-  }
-
-  /* ========== KPI 指标条 ========== */
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .kpi-card {
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 16px 18px 14px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .kpi-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--kpi-color, var(--ink-3));
-  }
-
-  .kpi-label {
-    font-size: 12px;
-    color: var(--ink-3);
-    font-weight: 500;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .kpi-label .icon-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--kpi-color, var(--ink-3));
-  }
-
-  .kpi-value {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--ink-1);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.5px;
-    line-height: 1.1;
-    margin-bottom: 6px;
-  }
-
-  .kpi-value .unit {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--ink-3);
-    margin-left: 2px;
-  }
-
-  .kpi-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 11.5px;
-    color: var(--ink-4);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .kpi-meta .range {
-    display: flex;
-    gap: 8px;
-  }
-
-  .kpi-meta .range span {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-  }
-
-  .kpi-meta .range .max { color: var(--risk); }
-  .kpi-meta .range .min { color: var(--good); }
-
-  .kpi-spark {
-    height: 28px;
-    margin-top: 8px;
-    width: 100%;
-  }
-
-  /* ========== 主栅格布局 ========== */
-  .main-grid {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: var(--gap-lg);
-    margin-bottom: var(--gap-lg);
-  }
-
-  .sub-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--gap-lg);
-  }
-
-  /* ========== 卡片通用 ========== */
-  .card {
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px 12px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .card-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
     font-size: 14px;
-    font-weight: 600;
-    color: var(--ink-1);
+    cursor: pointer;
+    transition: all 0.2s;
   }
-
-  .card-title .bar {
-    width: 3px;
-    height: 14px;
-    border-radius: 2px;
-    background: var(--ink-1);
-  }
-
-  .card-title .sub {
-    font-size: 11.5px;
-    color: var(--ink-4);
-    font-weight: 400;
-    margin-left: 4px;
-  }
-
-  .card-badge {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 4px;
+  .btn:hover {
     background: var(--bg-soft);
-    color: var(--ink-3);
-    font-variant-numeric: tabular-nums;
   }
-
-  .card-body {
-    padding: 16px 20px 20px;
-    flex: 1;
-    min-height: 0;
+  .btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
   }
-
-  .chart {
-    width: 100%;
-    height: 100%;
-    min-height: 280px;
-  }
-
-  .chart-sm { min-height: 220px; }
-  .chart-md { min-height: 320px; }
-  .chart-lg { min-height: 360px; }
-
-  /* ========== 意图类别分布卡片 ========== */
-  .dist-card .card-body {
+  .stats-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
   }
-
-  .dist-legend {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .dist-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .dist-item .swatch {
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-
-  .dist-item .info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .dist-item .name {
-    font-size: 12.5px;
-    color: var(--ink-2);
-    font-weight: 500;
-    margin-bottom: 2px;
-  }
-
-  .dist-item .nums {
-    font-size: 11px;
-    color: var(--ink-4);
-    font-variant-numeric: tabular-nums;
-    display: flex;
-    gap: 8px;
-  }
-
-  .dist-item .nums strong {
-    color: var(--ink-2);
-    font-weight: 600;
-  }
-
-  /* ========== 平台对比卡片 ========== */
-  .platform-card .card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .platform-item {
-    display: grid;
-    grid-template-columns: 70px 1fr auto;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .platform-name {
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--ink-2);
-  }
-
-  .platform-bar-wrap {
-    height: 22px;
-    background: var(--bg-soft);
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .platform-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    border-radius: 4px;
-    transition: width 0.6s ease;
-  }
-
-  .platform-bar.brand {
-    background: var(--cat-brand);
-    opacity: 0.85;
-  }
-
-  .platform-bar.risk {
-    background: var(--risk);
-    opacity: 0.7;
-  }
-
-  .platform-value {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink-1);
-    font-variant-numeric: tabular-nums;
-    min-width: 48px;
-    text-align: right;
-  }
-
-  .platform-sub {
-    display: flex;
-    gap: 16px;
-    margin-top: 4px;
-    font-size: 11px;
-    color: var(--ink-4);
-  }
-
-  .platform-sub span {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .platform-sub .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-  }
-
-  /* ========== 排名表 ========== */
-  .rank-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--gap-lg);
-    margin-bottom: var(--gap-lg);
-  }
-
-  .rank-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-  }
-
-  .rank-table th {
-    text-align: left;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-4);
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--line);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .rank-table th:last-child { text-align: right; }
-
-  .rank-table td {
-    padding: 9px 12px;
-    border-bottom: 1px solid var(--bg-soft);
-    vertical-align: middle;
-  }
-
-  .rank-table tr:last-child td { border-bottom: none; }
-
-  .rank-table tr:hover {
-    background: var(--bg-elev);
-  }
-
-  .rank-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    background: var(--bg-soft);
-    color: var(--ink-3);
-  }
-
-  .rank-bottom .rank-num.top3 {
-    background: var(--risk-soft);
-    color: var(--risk);
-  }
-
-  .rank-top .rank-num.top3 {
-    background: var(--good-soft);
-    color: var(--good);
-  }
-
-  .rank-intent {
-    color: var(--ink-2);
-    font-weight: 500;
-    max-width: 280px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .rank-cat {
-    display: inline-block;
-    font-size: 10.5px;
-    padding: 1px 7px;
-    border-radius: 3px;
-    font-weight: 500;
-  }
-
-  .rank-score {
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    font-size: 13px;
-  }
-
-  .rank-bottom .rank-score { color: var(--risk); }
-  .rank-top .rank-score { color: var(--good); }
-
-  .rank-score .unit {
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--ink-4);
-    margin-left: 1px;
-  }
-
-  /* ========== 热力图 ========== */
-  .heatmap-card .card-body {
-    padding: 16px 20px 24px;
-  }
-
-  /* ========== 底部洞察带 ========== */
-  .insights-band {
-    background: var(--ink-1);
-    color: #E8E4DA;
-    border-radius: 10px;
-    padding: 20px 24px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-
-  .insight-item h4 {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-4);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 8px;
-  }
-
-  .insight-item p {
-    font-size: 13px;
-    line-height: 1.6;
-    color: #E8E4DA;
-  }
-
-  .insight-item p strong {
-    color: #FFFFFF;
-    font-weight: 600;
-  }
-
-  .insight-item .accent {
-    color: #E8B4A8;
-    font-weight: 600;
-  }
-
-  /* ========== 洞察卡片（新版） ========== */
-  .insights-section {
-    margin-bottom: 8px;
-  }
-
-  .insights-section .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-  }
-
-  .insights-section .section-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--ink-1);
-  }
-
-  .insights-section .section-title .bar {
-    width: 3px;
-    height: 16px;
-    border-radius: 2px;
-    background: var(--ink-1);
-  }
-
-  .insights-section .section-sub {
-    font-size: 12px;
-    color: var(--ink-4);
-  }
-
-  .insights-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-
-  .insight-card {
+  .stat-card {
     background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 18px 18px 16px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
-
-  .insight-card:hover {
-    transform: translateY(-2px);
-  }
-
-  .insight-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--insight-accent, var(--ink-3));
-  }
-
-  .insight-card-head {
+  .stat-header {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 12px;
-  }
-
-  .insight-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    background: var(--insight-accent-bg, var(--bg-soft));
+    margin-bottom: 16px;
   }
-
-  .insight-icon svg {
-    width: 18px;
-    height: 18px;
-    stroke: var(--insight-accent, var(--ink-3));
-    fill: none;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .stat-label {
+    font-size: 14px;
+    color: var(--ink-3);
   }
-
-  .insight-num {
-    text-align: right;
-  }
-
-  .insight-num .value {
-    font-size: 22px;
+  .stat-value {
+    font-size: 32px;
     font-weight: 700;
-    color: var(--insight-accent, var(--ink-1));
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.3px;
-    line-height: 1;
-  }
-
-  .insight-num .value .unit {
-    font-size: 13px;
-    font-weight: 500;
-    margin-left: 1px;
-  }
-
-  .insight-num .label {
-    font-size: 10.5px;
-    color: var(--ink-4);
-    margin-top: 3px;
-    font-weight: 400;
-  }
-
-  .insight-card h4 {
-    font-size: 13px;
-    font-weight: 600;
     color: var(--ink-1);
-    margin-bottom: 6px;
-    line-height: 1.4;
   }
-
-  .insight-card p {
+  .stat-change {
     font-size: 12px;
-    line-height: 1.6;
-    color: var(--ink-3);
+    padding: 2px 6px;
+    border-radius: 4px;
   }
-
-  .insight-card p strong {
-    color: var(--ink-1);
+  .stat-change.up {
+    background: #E8F5E9;
+    color: var(--success);
+  }
+  .stat-change.down {
+    background: #FFEBEE;
+    color: var(--danger);
+  }
+  .chart-section {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
+  }
+  .chart-title {
+    font-size: 18px;
     font-weight: 600;
-  }
-
-  .insight-card .insight-spark {
-    height: 32px;
-    margin-top: 12px;
-    width: 100%;
-  }
-
-  /* ========== 意图数据明细 ========== */
-  .detail-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px 28px;
-    padding: 4px 0 20px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 20px;
-    align-items: center;
-  }
-
-  .filter-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .filter-label {
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--ink-3);
-    white-space: nowrap;
-  }
-
-  .select-wrap {
-    position: relative;
-    min-width: 320px;
-  }
-
-  .filter-select {
-    width: 100%;
-    padding: 7px 32px 7px 12px;
-    font-size: 12.5px;
-    font-family: inherit;
+    margin-bottom: 24px;
     color: var(--ink-1);
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    transition: border-color 0.2s;
   }
-
-  .filter-select:hover {
-    border-color: var(--line-strong);
-  }
-
-  .filter-select:focus {
-    outline: none;
-    border-color: var(--ink-3);
-  }
-
-  .select-arrow {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 14px;
-    height: 14px;
-    color: var(--ink-4);
-    pointer-events: none;
-  }
-
-  .platform-pills {
+  .chart-legend {
     display: flex;
-    gap: 6px;
+    gap: 24px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
   }
-
-  .pill {
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    font-family: inherit;
-    color: var(--ink-3);
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .pill:hover {
-    color: var(--ink-1);
-    border-color: var(--line-strong);
-  }
-
-  .pill.active {
-    color: #fff;
-    background: var(--ink-1);
-    border-color: var(--ink-1);
-  }
-
-  .detail-time-filter {
+  .chart-legend-item {
     display: flex;
     align-items: center;
     gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .time-pill {
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    font-family: inherit;
-    color: var(--ink-3);
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .time-pill:hover {
-    color: var(--ink-1);
-    border-color: var(--line-strong);
-  }
-
-  .time-pill.active {
-    color: #fff;
-    background: var(--ink-1);
-    border-color: var(--ink-1);
-  }
-
-  .detail-time-custom {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-left: 4px;
-  }
-
-  .detail-time-custom input[type="date"] {
-    border: 1px solid var(--line);
-    border-radius: 5px;
-    padding: 4px 8px;
-    font-size: 11.5px;
-    font-family: var(--font-mono);
-    color: var(--ink-2);
-    background: var(--bg-elev);
-    cursor: pointer;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .detail-time-custom input[type="date"]:focus {
-    outline: none;
-    border-color: var(--ink-3);
-  }
-
-  .detail-time-custom .dash {
-    color: var(--ink-4);
-    font-size: 12px;
-  }
-
-  .detail-trend-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--ink-1);
-  }
-
-  .detail-trend-legend {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 11.5px;
-    font-weight: 400;
+    font-size: 14px;
     color: var(--ink-3);
   }
-
-  .legend-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
+  .chart-legend-color {
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    margin-right: 5px;
-    vertical-align: middle;
   }
-
-  .detail-table-wrap {
-    margin-top: 20px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .detail-table {
+  #main-chart {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-  }
-
-  .detail-table thead {
-    background: var(--bg-soft);
-  }
-
-  .detail-table th {
-    padding: 10px 14px;
-    text-align: left;
-    font-weight: 600;
-    color: var(--ink-2);
-    font-size: 12px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .detail-table td {
-    padding: 11px 14px;
-    border-bottom: 1px solid var(--line);
-    color: var(--ink-2);
-  }
-
-  .detail-table tbody tr:last-child td {
-    border-bottom: none;
-  }
-
-  .detail-table tbody tr:hover {
-    background: var(--bg-elev);
-  }
-
-  .detail-table .detail-intent {
-    font-weight: 500;
-    color: var(--ink-1);
-    max-width: 480px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .detail-table .detail-cat {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11.5px;
-    font-weight: 500;
-  }
-
-  .detail-table .detail-score {
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    font-size: 13px;
-  }
-
-  .detail-table .detail-score .unit {
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--ink-4);
-    margin-left: 1px;
-  }
-
-  .detail-table .rank-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 4px;
-    font-size: 11.5px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    background: var(--bg-soft);
-    color: var(--ink-3);
-  }
-
-  .detail-table .rank-num.top3 {
-    background: var(--good-soft);
-    color: var(--good);
-  }
-
-  /* 展开/收起按钮 */
-  .expand-row {
-    display: flex;
-    justify-content: center;
-    padding: 12px 0 4px;
-  }
-
-  .expand-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 18px;
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--ink-2);
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s ease;
-  }
-
-  .expand-btn:hover {
-    color: var(--ink-1);
-    border-color: var(--line-strong);
-    background: var(--bg-soft);
-  }
-
-  .expand-btn svg {
-    width: 14px;
-    height: 14px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: transform 0.2s ease;
-  }
-
-  .expand-btn.expanded svg {
-    transform: rotate(180deg);
-  }
-
-  .expand-btn .count {
-    color: var(--ink-4);
-    font-weight: 400;
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* ========== 响应式 ========== */
-  @media (max-width: 1200px) {
-    .kpi-row { grid-template-columns: repeat(2, 1fr); }
-    .main-grid { grid-template-columns: 1fr; }
-    .select-wrap { min-width: 240px; }
-  }
-
-  @media (max-width: 768px) {
-    .dashboard { padding: 16px; }
-    .kpi-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .kpi-value { font-size: 24px; }
-    .sub-grid { grid-template-columns: 1fr; }
-    .rank-section { grid-template-columns: 1fr; }
-    .header { flex-direction: column; align-items: flex-start; }
-    .rank-intent { max-width: 180px; }
-    .time-filter { flex-wrap: wrap; }
-    .time-custom { order: 3; width: 100%; justify-content: center; padding-top: 4px; border-top: 1px solid var(--line); margin-top: 4px; }
-    .detail-filter { flex-direction: column; align-items: flex-start; }
-    .select-wrap { width: 100%; min-width: 0; }
-    .detail-table .detail-intent { max-width: 180px; }
+    height: 400px;
   }
 </style>
 </head>
 <body>
-<div id="page-loading" style="position:fixed;top:0;left:0;width:100%;height:100%;
-  background:var(--bg,#F5F3EE);display:flex;align-items:center;justify-content:center;
-  z-index:9999;font-family:sans-serif;color:var(--ink-2,#3A3F4A);font-size:16px;
-  transition:opacity 0.3s;">
-  <div style="text-align:center">
-    <div style="font-size:40px;margin-bottom:12px">📊</div>
-    <div>数据看板加载中...</div>
-    <div style="font-size:12px;color:var(--ink-4,#9AA0AB);margin-top:8px">
-      如长时间空白请刷新页面</div>
-  </div>
-</div>
-
-<div class="dashboard">
-
-  <!-- ========== 顶部标题栏 ========== -->
-  <header class="header">
+<div class="container">
+  <div class="header">
     <div class="header-left">
-      <div class="brand-mark">
-        <svg viewBox="0 0 24 24">
-          <path d="M3 12h3l2-7 4 14 2-7h7"/>
-        </svg>
-      </div>
-      <div class="title-block">
+      <div class="logo">📊</div>
+      <div class="header-title">
         <h1>好奇舆情专项数据看板</h1>
-        <div class="subtitle">
-          <span>Huggies · AI 平台舆情监测</span>
-          <span class="dot"></span>
-          <span>4 大平台 · 125 个意图</span>
-        </div>
+        <p>Huggies · AI 平台舆情监测 · 4大平台 · 125个意图</p>
       </div>
     </div>
     <div class="header-right">
-      <div class="meta-chip">
-        意图数 <strong>125</strong>
-      </div>
-      <div class="time-filter" id="timeFilter">
-        <button class="time-filter-btn active" data-range="all">全部</button>
-        <button class="time-filter-btn" data-range="7d">近7天</button>
-        <button class="time-filter-btn" data-range="custom">自定义</button>
-        <div class="time-filter-divider"></div>
-        <div class="time-custom" id="timeCustom">
-          <input type="date" id="dateStart" value="2026-07-22" min="2026-07-22" max="2026-08-05">
-          <span class="dash">—</span>
-          <input type="date" id="dateEnd" value="2026-08-05" min="2026-07-22" max="2026-08-05">
-        </div>
-      </div>
+      <button class="btn active">全部</button>
+      <button class="btn">近7天</button>
+      <button class="btn">自定义</button>
+      <input type="date" class="btn" value="2026-07-22">
+      <input type="date" class="btn" value="2026-08-05">
     </div>
-  </header>
+  </div>
 
-  <!-- ========== KPI 指标区 ========== -->
-  <section class="kpi-row" id="kpiRow">
-    <!-- 由 JS 渲染 -->
-  </section>
-
-  <!-- ========== 主分析区 ========== -->
-  <section class="main-grid">
-    <!-- 中正率趋势图 -->
-    <div class="card" style="grid-column: 1 / -1;">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="bar"></span>
-          中正率趋势
-          <span class="sub">按意图类别</span>
-        </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-header">
+        <span class="stat-label">品牌提及率</span>
+        <span class="stat-change up">↑100.0 ↓0.0</span>
       </div>
-      <div class="card-body">
-        <div id="trendChart" class="chart chart-md"></div>
-      </div>
+      <div class="stat-value" id="stat-brand">90.6%</div>
     </div>
-  </section>
-
-  <!-- ========== 第二行：平台对比 ========== -->
-  <section class="sub-grid" style="margin-bottom: 24px;">
-    <!-- 平台对比 -->
-    <div class="card" style="grid-column: 1 / -1;">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="bar"></span>
-          平台对比分析
-          <span class="sub">4 大 AI 平台 · 中正率与品牌提及率</span>
-        </div>
-        <div class="card-badge">中正率排序</div>
+    <div class="stat-card">
+      <div class="stat-header">
+        <span class="stat-label">中正率</span>
+        <span class="stat-change up">↑53.3 ↓51.9</span>
       </div>
-      <div class="card-body">
-        <div id="platformChart" class="chart chart-md"></div>
-      </div>
+      <div class="stat-value" id="stat-avg">52.7%</div>
     </div>
-  </section>
+  </div>
 
-  <!-- ========== 第三行：Top/Bottom 10 排名 ========== -->
-  <section class="rank-section">
-    <!-- Bottom 10 -->
-    <div class="card rank-bottom">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="bar" style="background: var(--risk);"></span>
-          风险 Top 10 意图
-          <span class="sub">中正率最低</span>
-        </div>
-        <div class="card-badge" style="background: var(--risk-soft); color: var(--risk);">需重点关注</div>
-      </div>
-      <div class="card-body" style="padding: 0;">
-          <table class="rank-table" id="bottomTable">
-          <thead>
-            <tr>
-              <th style="width: 40px;">#</th>
-              <th>意图</th>
-              <th>类别</th>
-              <th style="text-align: right;">中正率</th>
-              <th style="text-align: right;">品牌提及率</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+  <div class="chart-section">
+    <div class="chart-title">中正率趋势 · 按意图类别</div>
+    <div class="chart-legend">
+      <div class="chart-legend-item"><span class="chart-legend-color" style="background: #165DFF;"></span>品牌类意图</div>
+      <div class="chart-legend-item"><span class="chart-legend-color" style="background: #8B6F4E;"></span>品类意图</div>
+      <div class="chart-legend-item"><span class="chart-legend-color" style="background: #2E7D32;"></span>小森林产品类意图</div>
+      <div class="chart-legend-item"><span class="chart-legend-color" style="background: #D32F2F;"></span>竞对类意图</div>
     </div>
-
-    <!-- Top 10 -->
-    <div class="card rank-top">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="bar" style="background: var(--good);"></span>
-          表现 Top 10 意图
-          <span class="sub">中正率最高</span>
-        </div>
-        <div class="card-badge" style="background: var(--good-soft); color: var(--good);">表现优异</div>
-      </div>
-      <div class="card-body" style="padding: 0;">
-          <table class="rank-table" id="topTable">
-          <thead>
-            <tr>
-              <th style="width: 40px;">#</th>
-              <th>意图</th>
-              <th>类别</th>
-              <th style="text-align: right;">中正率</th>
-              <th style="text-align: right;">品牌提及率</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 第四行：意图数据明细 ========== -->
-  <section class="card" style="margin-bottom: 24px;">
-    <div class="card-header">
-      <div class="card-title">
-        <span class="bar"></span>
-        意图数据明细
-        <span class="sub">125 个意图 · 按意图 + 平台维度查看中正率与品牌提及率</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <!-- 筛选器 -->
-      <div class="detail-filter">
-        <div class="filter-item">
-          <label class="filter-label">意图筛选</label>
-          <div class="select-wrap">
-            <select id="intentSelect" class="filter-select">
-              <option value="all">全部意图</option>
-            </select>
-            <svg class="select-arrow" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-        <div class="filter-item">
-          <label class="filter-label">平台筛选</label>
-          <div class="select-wrap" style="min-width: 180px;">
-            <select id="platformSelect" class="filter-select">
-              <option value="all">全部平台</option>
-              <option value="豆包">豆包</option>
-              <option value="通义千问">通义千问</option>
-              <option value="DeepSeek">DeepSeek</option>
-              <option value="元宝">元宝</option>
-            </select>
-            <svg class="select-arrow" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-        <div class="filter-item">
-          <label class="filter-label">时间筛选</label>
-          <div class="detail-time-filter" id="detailTimeFilter">
-            <button class="time-pill" data-range="all">全部</button>
-            <button class="time-pill" data-range="7d">近7天</button>
-            <button class="time-pill" data-range="custom">自定义</button>
-            <div class="detail-time-custom" id="detailTimeCustom">
-              <input type="date" id="detailDateStart" value="2026-07-22" min="2026-07-22" max="2026-08-05">
-              <span class="dash">—</span>
-              <input type="date" id="detailDateEnd" value="2026-08-05" min="2026-07-22" max="2026-08-05">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 分日趋势图 -->
-      <div class="detail-trend-title">
-        <span>分日数据趋势</span>
-      </div>
-      <div id="detailTrendChart" class="chart" style="height: 260px; width: 100%;"></div>
-
-      <!-- 数据表格 -->
-      <div class="detail-table-wrap">
-        <table class="detail-table" id="detailTable">
-          <thead>
-            <tr>
-              <th style="width: 48px;">#</th>
-              <th>意图</th>
-              <th style="width: 100px;">类别</th>
-              <th style="width: 120px; text-align: right;">中正率</th>
-              <th style="width: 120px; text-align: right;">品牌提及率</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="expand-row" id="expandRow">
-        <button class="expand-btn" id="expandBtn">
-          <span>展开全部</span>
-          <span class="count">(共 125 条)</span>
-          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
+    <div id="main-chart"></div>
+  </div>
 </div>
 
 <script>
-// 全局错误捕获
-window.onerror = function(msg, url, line, col, err) {
-  var el = document.getElementById('page-loading');
-  if (el) {
-    el.innerHTML = '<div style="text-align:center;max-width:500px">' +
-      '<div style="font-size:40px;margin-bottom:12px">⚠️</div>' +
-      '<div style="font-weight:600;margin-bottom:8px">页面加载异常</div>' +
-      '<div style="font-size:12px;color:var(--ink-3,#6B7280);word-break:break-all">' +
-      msg + '</div>' +
-      '<div style="margin-top:12px"><button onclick="location.reload()" ' +
-      'style="padding:8px 20px;background:var(--good,#2E7D5B);color:#fff;border:none;' +
-      'border-radius:6px;cursor:pointer;font-size:14px">刷新页面</button></div></div>';
-  }
-  return false;
-};
-
-// ========== 原始数据 ==========
-const RAW_DATA = {"dates": ["2026-07-22", "2026-07-23", "2026-07-24", "2026-07-25", "2026-07-26", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06"], "categories": ["品牌类意图", "品类意图", "小森林产品类意图", "竞对类意图"], "totalRecords": 7985, "totalIntents": 125, "metricNames": ["品牌提及率", "中正率", "内容风险严重度", "品牌归属明确度", "信息平衡程度", "风险表达强度"], "overview": {"品牌提及率": {"avg": 78.76, "max": 100, "min": 0}, "中正率": {"avg": 52.64, "max": 100, "min": 24.07}, "内容风险严重度": {"avg": 44.77, "max": 100, "min": 5}, "品牌归属明确度": {"avg": 48.35, "max": 100, "min": 5}, "信息平衡程度": {"avg": 59.7, "max": 100, "min": 28}, "风险表达强度": {"avg": 61.87, "max": 100, "min": 8}}, "dailyOverall": [{"date": "2026-07-22", "avg": 53.34, "count": 492}, {"date": "2026-07-23", "avg": 52.71, "count": 497}, {"date": "2026-07-24", "avg": 51.85, "count": 497}, {"date": "2026-07-25", "avg": 51.92, "count": 500}, {"date": "2026-07-26", "avg": 52.71, "count": 500}, {"date": "2026-07-27", "avg": 53.14, "count": 500}, {"date": "2026-07-28", "avg": 52.83, "count": 500}, {"date": "2026-07-29", "avg": 52.26, "count": 500}, {"date": "2026-07-30", "avg": 53.26, "count": 499}, {"date": "2026-07-31", "avg": 52.76, "count": 500}, {"date": "2026-08-01", "avg": 52.59, "count": 500}, {"date": "2026-08-02", "avg": 52.82, "count": 500}, {"date": "2026-08-03", "avg": 52.65, "count": 500}, {"date": "2026-08-04", "avg": 52.56, "count": 500}, {"date": "2026-08-05", "avg": 52.53, "count": 500}, {"date": "2026-08-06", "avg": 52.57, "count": 500}], "trendByCategory": [{"name": "品牌类意图", "data": [51.08, 52.14, 52.73, 52.41, 51.34, 51.55, 50.85, 52.83, 53.1, 52.47, 52.24, 51.35, 51.74, 52.38, 52.68, 52.6]}, {"name": "品类意图", "data": [53.9, 54.34, 51.01, 52.24, 53.66, 53.97, 54.56, 51.3, 53.42, 51.03, 51.81, 53.05, 52.62, 52.14, 52.66, 51.62]}, {"name": "小森林产品类意图", "data": [50.58, 49.4, 50.13, 47.98, 48.65, 50.51, 49.38, 49.72, 48.64, 50.29, 51.14, 48.75, 48.59, 49.28, 48.45, 49.63]}, {"name": "竞对类意图", "data": [57.61, 53.35, 54.44, 54.74, 56.25, 55.7, 54.82, 56.13, 57.73, 58.98, 55.92, 57.89, 57.69, 56.85, 56.19, 57.4]}], "platformComparison": [{"name": "DeepSeek", "中正率": 49.63, "品牌提及率": 81.12, "内容风险严重度": 42.14, "count": 2373}, {"name": "豆包", "中正率": 59.39, "品牌提及率": 73.64, "内容风险严重度": 53.42, "count": 2366}, {"name": "通义千问", "中正率": 52.62, "品牌提及率": 78.12, "内容风险严重度": 43.74, "count": 2373}, {"name": "元宝", "中正率": 48.94, "品牌提及率": 82.26, "内容风险严重度": 39.83, "count": 2373}], "categoryDistribution": [{"name": "品牌类意图", "value": 1899, "percent": 23.78}, {"name": "品类意图", "value": 3799, "percent": 47.58}, {"name": "小森林产品类意图", "value": 1900, "percent": 23.79}, {"name": "竞对类意图", "value": 1887, "percent": 23.63}], "radarData": [{"name": "品牌类意图", "品牌提及率": 98.91, "中正率": 52.12, "内容风险严重度": 43.65, "品牌归属明确度": 41.62, "信息平衡程度": 64.09, "风险表达强度": 62.51}, {"name": "品类意图", "品牌提及率": 50.46, "中正率": 52.66, "内容风险严重度": 44.13, "品牌归属明确度": 55.99, "信息平衡程度": 55.99, "风险表达强度": 60.1}, {"name": "小森林产品类意图", "品牌提及率": 95.99, "中正率": 49.34, "内容风险严重度": 41.83, "品牌归属明确度": 38.69, "信息平衡程度": 59.14, "风险表达强度": 60.9}, {"name": "竞对类意图", "品牌提及率": 98.23, "中正率": 56.45, "内容风险严重度": 50.16, "品牌归属明确度": 49.43, "信息平衡程度": 63.43, "风险表达强度": 65.77}], "heatmapData": [{"category": "品牌类意图", "品牌提及率": 98.89, "中正率": 52.09, "内容风险严重度": 43.55, "品牌归属明确度": 41.59, "信息平衡程度": 64.15, "风险表达强度": 62.47}, {"category": "品类意图", "品牌提及率": 50.57, "中正率": 52.73, "内容风险严重度": 44.21, "品牌归属明确度": 56.05, "信息平衡程度": 56.07, "风险表达强度": 60.15}, {"category": "小森林产品类意图", "品牌提及率": 95.95, "中正率": 49.32, "内容风险严重度": 41.81, "品牌归属明确度": 38.66, "信息平衡程度": 59.13, "风险表达强度": 60.89}, {"category": "竞对类意图", "品牌提及率": 98.31, "中正率": 56.39, "内容风险严重度": 50.04, "品牌归属明确度": 49.34, "信息平衡程度": 63.45, "风险表达强度": 65.74}], "bottom10Intents": [{"intent": "经济参考报报道的纸尿裤甲酰胺事件详情是什么？", "category": "品类意图", "avg": 37.49, "brandMention": 100.0, "count": 4}, {"intent": "好奇小森林甲酰胺事件是怎么回事？", "category": "小森林产品类意图", "avg": 37.78, "brandMention": 100.0, "count": 4}, {"intent": "好奇纸尿裤甲酰胺风波反转了是怎么回事？", "category": "品牌类意图", "avg": 38.01, "brandMention": 100.0, "count": 4}, {"intent": "好奇小森林纸尿裤被曝检出甲酰胺是真的吗？", "category": "小森林产品类意图", "avg": 38.22, "brandMention": 99.08, "count": 4}, {"intent": "纸尿裤甲酰胺风波五连反转是什么情况？", "category": "品类意图", "avg": 38.68, "brandMention": 100.0, "count": 4}, {"intent": "好奇小森林纸尿裤有没有有害物质？", "category": "小森林产品类意图", "avg": 38.72, "brandMention": 93.75, "count": 4}, {"intent": "好奇小森林纸尿裤安全事件到底怎么回事？", "category": "小森林产品类意图", "avg": 39.04, "brandMention": 100.0, "count": 4}, {"intent": "纸尿裤甲酰胺风波反转了是怎么回事？", "category": "品类意图", "avg": 39.28, "brandMention": 100.0, "count": 4}, {"intent": "好奇纸尿裤安全事件到底怎么回事？", "category": "品牌类意图", "avg": 39.6, "brandMention": 100.0, "count": 4}, {"intent": "好奇纸尿裤被曝检出甲酰胺是真的吗？", "category": "品牌类意图", "avg": 40.18, "brandMention": 100.0, "count": 4}], "top10Intents": [{"intent": "好奇纸尿裤检测报告在哪里可以看？", "category": "品牌类意图", "avg": 94.99, "brandMention": 99.08, "count": 4}, {"intent": "哪些纸尿裤通过了第三方安全检测？", "category": "品类意图", "avg": 86.38, "brandMention": 77.65, "count": 4}, {"intent": "好奇小森林纸尿裤检测报告在哪里可以看？", "category": "小森林产品类意图", "avg": 84.59, "brandMention": 98.38, "count": 4}, {"intent": "好奇和雀氏哪个甲酰胺检测结果更好？", "category": "竞对类意图", "avg": 79.54, "brandMention": 88.88, "count": 4}, {"intent": "纸尿裤有没有质检报告可以查？", "category": "品类意图", "avg": 75.56, "brandMention": 43.88, "count": 4}, {"intent": "好奇纸尿裤复检结果出来了吗？", "category": "品牌类意图", "avg": 74.66, "brandMention": 100.0, "count": 4}, {"intent": "好奇纸尿裤有第三方检测报告吗？", "category": "品牌类意图", "avg": 70.54, "brandMention": 99.15, "count": 4}, {"intent": "好奇和帮宝适哪个复检结果更好？", "category": "竞对类意图", "avg": 69.92, "brandMention": 93.18, "count": 4}, {"intent": "好奇和Babycare哪个第三方检测更安全？", "category": "竞对类意图", "avg": 69.09, "brandMention": 96.3, "count": 4}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "avg": 68.45, "brandMention": 93.55, "count": 4}], "intentDetailData": [{"intent": "含甲酰胺的纸尿裤长期使用有什么后果？", "category": "品类意图", "date": "2026-08-06", "platform": "DeepSeek", "品牌提及率": 0.0, "中正率": 51.34, "内容风险严重度": 39.7, "品牌归属明确度": 63.2, "信息平衡程度": 57.2, "风险表达强度": 52.53}, {"intent": "含甲酰胺的纸尿裤长期使用有什么后果？", "category": "品类意图", "date": "2026-08-06", "platform": "豆包", "品牌提及率": 0.0, "中正率": 43.15, "内容风险严重度": 30.25, "品牌归属明确度": 58.0, "信息平衡程度": 48.75, "风险表达强度": 43.88}, {"intent": "含甲酰胺的纸尿裤长期使用有什么后果？", "category": "品类意图", "date": "2026-08-06", "platform": "通义千问", "品牌提及率": 22.2, "中正率": 39.92, "内容风险严重度": 27.3, "品牌归属明确度": 54.67, "信息平衡程度": 44.89, "风险表达强度": 41.04}, {"intent": "含甲酰胺的纸尿裤长期使用有什么后果？", "category": "品类意图", "date": "2026-08-06", "platform": "元宝", "品牌提及率": 37.5, "中正率": 47.98, "内容风险严重度": 32.5, "品牌归属明确度": 61.0, "信息平衡程度": 54.0, "风险表达强度": 54.5}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "date": "2026-08-06", "platform": "DeepSeek", "品牌提及率": 100.0, "中正率": 91.0, "内容风险严重度": 89.73, "品牌归属明确度": 90.53, "信息平衡程度": 94.6, "风险表达强度": 89.17}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "date": "2026-08-06", "platform": "豆包", "品牌提及率": 85.7, "中正率": 58.67, "内容风险严重度": 53.57, "品牌归属明确度": 58.86, "信息平衡程度": 58.29, "风险表达强度": 67.86}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "date": "2026-08-06", "platform": "通义千问", "品牌提及率": 88.5, "中正率": 71.77, "内容风险严重度": 68.15, "品牌归属明确度": 68.46, "信息平衡程度": 74.0, "风险表达强度": 78.65}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "date": "2026-08-06", "platform": "元宝", "品牌提及率": 100.0, "中正率": 52.37, "内容风险严重度": 46.38, "品牌归属明确度": 46.0, "信息平衡程度": 54.75, "风险表达强度": 66.25}]};
-
-// 全局变量初始化
-const dailyOverall = RAW_DATA.dailyOverall;
-const intentData = RAW_DATA.intentData;
-const platformData = RAW_DATA.platformData;
-const intentCategories = RAW_DATA.intentCategories;
-
-
-// 平台名归一化：拼音/英文名 → 统一中文名
-const PLATFORM_NAME_MAP = {
-  'doubao': '豆包', 'Doubao': '豆包', 'DOUBAO': '豆包', 'doubao-platform': '豆包',
-  'tongyi': '通义千问', 'Tongyi': '通义千问', 'TONGYI': '通义千问', 'tongyiqianwen': '通义千问', 'tongyi-qianwen': '通义千问',
-  'deepseek': 'DeepSeek', 'Deepseek': 'DeepSeek', 'DEEPSEEK': 'DeepSeek', 'DeepSeek': 'DeepSeek',
-  'yuanbao': '元宝', 'Yuanbao': '元宝', 'YUANBAO': '元宝', 'yuan-bao': '元宝'
-};
-
-function normalizePlatformName(name) {
-  if (!name) return name;
-  return PLATFORM_NAME_MAP[name] || name;
-}
-
-// 对原始数据中的平台名做归一化（兼容拼音命名的数据源）
-(function normalizeRawDataPlatforms() {
-  // 归一化 platformComparison
-  if (RAW_DATA.platformComparison) {
-    RAW_DATA.platformComparison.forEach(p => {
-      const normalized = normalizePlatformName(p.name);
-      if (normalized !== p.name) p.name = normalized;
-    });
-  }
-  // 归一化 intentDetailData 中的 platforms key
-  if (RAW_DATA.intentDetailData) {
-    RAW_DATA.intentDetailData.forEach(item => {
-      if (!item.platforms) return;
-      const normalized = {};
-      Object.keys(item.platforms).forEach(key => {
-        const newKey = normalizePlatformName(key);
-        normalized[newKey] = item.platforms[key];
-      });
-      item.platforms = normalized;
-    });
-  }
-})();
-
-// 生成 125 条意图明细数据（基于原始 20 条扩展）
-function generate125Intents() {
-  const base = RAW_DATA.intentDetailData;
-  const categories = RAW_DATA.categories;
-  const allPlatforms = ['豆包', '通义千问', 'DeepSeek', '元宝'];
-  const result = [];
-  
-  // 先放入原始 20 条（补齐平台覆盖和日期覆盖字段，原始数据全平台全日期覆盖）
-  base.forEach(item => {
-    const copy = JSON.parse(JSON.stringify(item));
-    copy.platforms = copy.platforms || {};
-    // 原始 20 条全部 4 平台都有数据
-    copy.activePlatforms = allPlatforms.slice();
-    // 原始 20 条覆盖全部 15 天
-    copy.startDay = 0;
-    copy.endDay = 14;
-    // 为原始 20 条生成品牌提及率分日数据：以各平台品牌提及率均值为基准，跟随中正率的波动模式
-    const pkeys = Object.keys(copy.platforms);
-    const avgBrand = pkeys.reduce((s, p) => s + copy.platforms[p].品牌提及率, 0) / pkeys.length;
-    const avgZZ = pkeys.reduce((s, p) => s + copy.platforms[p].中正率, 0) / pkeys.length;
-    dailyOverallBrand = dailyOverall.map((zz, i) => {
-      // 品牌提及率波动幅度约为中正率波动的 0.3 倍（品牌提及率更稳定）
-      const zzDelta = zz - avgZZ;
-      const brandDelta = zzDelta * 0.3 + (Math.sin(i * 1.1 + avgBrand * 0.1) * 0.8);
-      return Math.max(20, Math.min(99, avgBrand + brandDelta));
-    });
-    // 为原始 20 条生成按平台分日数据（支撑平台筛选下的分日趋势）
-    dailyOverallByPlatform = {};
-    dailyOverallBrandByPlatform = {};
-    pkeys.forEach(pname => {
-      const platZZ = copy.platforms[pname].中正率;
-      const platBrand = copy.platforms[pname].品牌提及率;
-      // 以整体 daily 为基准，叠加平台偏移量，生成该平台的分日趋势
-      const offset = platZZ - avgZZ;
-      const platDaily = dailyOverall.map(zz => {
-        if (zz == null) return null;
-        return Math.max(15, Math.min(100, zz + offset));
-      });
-      dailyOverallByPlatform[pname] = platDaily;
-      // 品牌提及率分日：以该平台品牌提及率为基准，跟随中正率波动
-      const brandOffset = platBrand - avgBrand;
-      const platDailyBrand = dailyOverallBrand.map(b => {
-        if (b == null) return null;
-        return Math.max(20, Math.min(99, b + brandOffset));
-      });
-      dailyOverallBrandByPlatform[pname] = platDailyBrand;
-    });
-    result.push(copy);
-  });
-  
-  // 生成额外 105 条，使用种子化伪随机保证稳定
-  let seed = 42;
-  function rand() {
-    seed = (seed * 9301 + 49297) % 233280;
-    return seed / 233280;
-  }
-  
-  const intentTemplates = [
-    '纸尿裤透气性怎么样？',
-    '纸尿裤吸水性好不好？',
-    '纸尿裤会不会红屁股？',
-    '纸尿裤尺码怎么选？',
-    '纸尿裤多久换一次？',
-    '纸尿裤和拉拉裤哪个好？',
-    '纸尿裤哪个牌子性价比高？',
-    '纸尿裤会不会侧漏？',
-    '纸尿裤厚度怎么样？',
-    '纸尿裤柔软度如何？',
-    '新生儿用什么纸尿裤好？',
-    '纸尿裤过敏怎么办？',
-    '纸尿裤起坨是怎么回事？',
-    '纸尿裤有味道正常吗？',
-    '纸尿裤怎么看真假？',
-    '纸尿裤囤多少合适？',
-    '纸尿裤和尿不湿有什么区别？',
-    '纸尿裤哪个牌子最薄？',
-    '纸尿裤会不会闷汗？',
-    '纸尿裤腰贴好不好用？',
-    '纸尿裤尿显怎么看？',
-    '纸尿裤会不会勒肚子？',
-    '纸尿裤有没有荧光剂？',
-    '纸尿裤保质期多久？',
-    '纸尿裤怎么收纳？',
-    '纸尿裤一片能用多久？',
-    '纸尿裤会不会掉下来？',
-    '纸尿裤前后怎么区分？',
-    '纸尿裤尺码偏大还是偏小？',
-    '纸尿裤冬天用会不会冷？',
-    '纸尿裤夏天用哪款好？',
-    '纸尿裤夜用哪款好？',
-    '纸尿裤日用和夜用有什么区别？',
-    '纸尿裤会不会反渗？',
-    '纸尿裤表层是什么材质？',
-    '纸尿裤芯体是什么做的？',
-    '纸尿裤会不会断层？',
-    '纸尿裤导流层有什么用？',
-    '纸尿裤透气底膜是什么？',
-    '纸尿裤3D表层是什么意思？',
-    '纸尿裤弱酸表层好不好？',
-    '纸尿裤芦荟精华有什么用？',
-    '纸尿裤洋甘菊成分安全吗？',
-    '纸尿裤会不会有细菌？',
-    '纸尿裤需要消毒吗？',
-    '纸尿裤开封后能用多久？',
-    '纸尿裤受潮了还能用吗？',
-    '纸尿裤变黄了还能用吗？',
-    '纸尿裤有味道怎么去除？',
-    '纸尿裤怎么选才不踩坑？',
-    '纸尿裤测评哪个网站靠谱？',
-    '纸尿裤排行榜前十名有哪些？',
-    '纸尿裤国产品牌哪个好？',
-    '纸尿裤进口品牌哪个好？',
-    '纸尿裤微商品牌靠谱吗？',
-    '纸尿裤电商版和实体店有区别吗？',
-    '纸尿裤试用装怎么申请？',
-    '纸尿裤正装和试用装有区别吗？',
-    '纸尿裤批发价是多少？',
-    '纸尿裤代理怎么做？',
-    '好奇纸尿裤和帮宝适哪个好？',
-    '好奇纸尿裤和花王哪个好？',
-    '好奇纸尿裤和尤妮佳哪个好？',
-    '好奇纸尿裤和大王哪个好？',
-    '好奇纸尿裤和妈咪宝贝哪个好？',
-    '好奇纸尿裤和雀氏哪个好？',
-    '好奇纸尿裤和安儿乐哪个好？',
-    '好奇纸尿裤和菲比哪个好？',
-    '好奇纸尿裤和爹地宝贝哪个好？',
-    '好奇纸尿裤和茵茵哪个好？',
-    '好奇小森林和皇家铂金哪个好？',
-    '好奇小森林和心钻装有什么区别？',
-    '好奇小森林和金装哪个好？',
-    '好奇小森林和银装区别大吗？',
-    '好奇小森林纸尿裤适合夏天吗？',
-    '好奇小森林纸尿裤夜用够不够？',
-    '好奇小森林会不会起坨？',
-    '好奇小森林透气性怎么样？',
-    '好奇小森林吸水性好不好？',
-    '好奇小森林会不会红屁股？',
-    '好奇小森林尺码偏大吗？',
-    '好奇小森林新生儿能用吗？',
-    '好奇小森林敏感肌能用吗？',
-    '好奇小森林和露安适哪个好？',
-    '好奇小森林和碧芭哪个好？',
-    '好奇小森林和百诺恩哪个好？',
-    '好奇小森林和凯儿得乐哪个好？',
-    '好奇小森林和米菲哪个好？',
-    '好奇小森林和柔丫哪个好？',
-    '好奇小森林和小茗妈妈哪个好？',
-    '好奇小森林和巴巴象哪个好？',
-    '好奇小森林和趣多多哪个好？',
-    '好奇小森林和爸爸的选择哪个好？',
-    '好奇小森林和泰迪熊哪个好？',
-    '好奇小森林和哆啦A梦哪个好？',
-    '好奇小森林和小猪佩奇哪个好？',
-    '好奇小森林和迪士尼哪个好？',
-    '好奇小森林和Hello Kitty哪个好？',
-    '好奇小森林和奥特曼哪个好？',
-    '好奇小森林和冰雪奇缘哪个好？'
-  ];
-  
-  for (let i = 0; i < 105; i++) {
-    const intent = intentTemplates[i % intentTemplates.length];
-    const cat = categories[Math.floor(rand() * categories.length)];
-    
-    // 基准中正率在 40-85 之间分布
-    const baseZZ = 40 + rand() * 45;
-    // 品牌提及率：品牌/小森林/竞对类高，品类类低
-    const brandBase = (cat === '品类意图') ? (30 + rand() * 40) : (85 + rand() * 14);
-    
-    // 随机决定该意图在哪些平台有数据（模拟真实数据的覆盖差异）
-    // 55% 全平台，25% 3个平台，15% 2个平台，5% 1个平台
-    const coverageRoll = rand();
-    let activePlatforms;
-    if (coverageRoll < 0.55) {
-      activePlatforms = allPlatforms.slice();
-    } else if (coverageRoll < 0.80) {
-      // 随机去掉 1 个平台
-      const dropIdx = Math.floor(rand() * 4);
-      activePlatforms = allPlatforms.filter((_, idx) => idx !== dropIdx);
-    } else if (coverageRoll < 0.95) {
-      // 随机保留 2 个平台
-      const shuffled = allPlatforms.slice().sort(() => rand() - 0.5);
-      activePlatforms = shuffled.slice(0, 2);
-    } else {
-      // 只保留 1 个平台
-      const pickIdx = Math.floor(rand() * 4);
-      activePlatforms = [allPlatforms[pickIdx]];
-    }
-    
-    const platforms = {};
-    allPlatforms.forEach((p, pi) => {
-      if (activePlatforms.includes(p)) {
-        const zzJitter = (rand() - 0.5) * 15;
-        const bmJitter = (rand() - 0.5) * 10;
-        platforms[p] = {
-          中正率: Math.max(20, Math.min(98, baseZZ + zzJitter + pi * -2)),
-          品牌提及率: Math.max(20, Math.min(99, brandBase + bmJitter))
-        };
-      }
-    });
-    
-    // 随机决定日期覆盖范围（模拟真实数据的时间差异）
-    // 55% 全日期，15% 前 5 天，15% 后 5 天，10% 中间 4 天，5% 只有 2 天
-    const dateRoll = rand();
-    let startDay, endDay;
-    if (dateRoll < 0.55) {
-      startDay = 0; endDay = 11;
-    } else if (dateRoll < 0.70) {
-      startDay = 0; endDay = 6;  // 前 7 天
-    } else if (dateRoll < 0.85) {
-      startDay = 7; endDay = 14;  // 后 8 天
-    } else if (dateRoll < 0.95) {
-      startDay = 3; endDay = 11;  // 中间 7 天
-    } else {
-      startDay = 1; endDay = 2;  // 只有 2 天（早期）
-    }
-    
-    // 生成 15 天的分日趋势数据（无数据的日期为 null）
-    const daily = [];
-    const dailyBrand = [];
-    let val = baseZZ;
-    let brandVal = brandBase;
-    for (let d = 0; d < 15; d++) {
-      if (d >= startDay && d <= endDay) {
-        val += (rand() - 0.48) * 3;
-        val = Math.max(25, Math.min(95, val));
-        daily.push(val);
-        // 品牌提及率波动幅度较小，跟随中正率趋势但更平稳
-        brandVal += (rand() - 0.48) * 1.5;
-        brandVal = Math.max(20, Math.min(99, brandVal));
-        dailyBrand.push(brandVal);
-      } else {
-        daily.push(null);
-        dailyBrand.push(null);
-      }
-    }
-    
-    // 生成按平台分日数据（支撑平台筛选下的分日趋势）
-    const dailyByPlatform = {};
-    const dailyBrandByPlatform = {};
-    const avgZZ = activePlatforms.reduce((s, p) => s + platforms[p].中正率, 0) / activePlatforms.length;
-    const avgBrand = activePlatforms.reduce((s, p) => s + platforms[p].品牌提及率, 0) / activePlatforms.length;
-    activePlatforms.forEach(pname => {
-      const platZZ = platforms[pname].中正率;
-      const platBrand = platforms[pname].品牌提及率;
-      const offset = platZZ - avgZZ;
-      const brandOffset = platBrand - avgBrand;
-      dailyByPlatform[pname] = daily.map(zz => {
-        if (zz == null) return null;
-        return Math.max(15, Math.min(100, zz + offset));
-      });
-      dailyBrandByPlatform[pname] = dailyBrand.map(b => {
-        if (b == null) return null;
-        return Math.max(20, Math.min(99, b + brandOffset));
-      });
-    });
-    
-    result.push({
-      intent: intent,
-      category: cat,
-      platforms: platforms,
-      daily: daily,
-      dailyBrand: dailyBrand,
-      dailyByPlatform: dailyByPlatform,
-      dailyBrandByPlatform: dailyBrandByPlatform,
-      activePlatforms: activePlatforms,
-      startDay: startDay,
-      endDay: endDay
-    });
-  }
-  
-  return result;
-}
-
-// ========== 色板 ==========
-const COLORS = {
-  good: '#2E7D5B',
-  risk: '#C24A3A',
-  warn: '#C88A2E',
-  ink1: '#1C1F26',
-  ink2: '#3A3F4A',
-  ink3: '#6B7280',
-  ink4: '#9AA0AB',
-  line: '#E2DED4',
-  bgSoft: '#EFECE4',
-  cat: {
-    '品牌类意图': '#2D5E8A',
-    '品类意图': '#8B5E3C',
-    '小森林产品类意图': '#3E7B62',
-    '竞对类意图': '#7A4F73'
-  }
-};
-
-// ========== 125 条全量意图数据（扩展生成） ==========
-const ALL_INTENTS = generate125Intents();
-
-// ========== 当前状态 ==========
-let state = {
-  startDate: RAW_DATA.dates[0],
-  endDate: RAW_DATA.dates[RAW_DATA.dates.length - 1]
-};
-
-// 图表实例引用
-const charts = {};
-
-// ========== 工具函数 ==========
-function fmt(n, d = 1) {
-  return Number(n).toFixed(d);
-}
-
-function shortDate(d) {
-  return d.slice(5).replace('-', '.');
-}
-
-function dateInRange(d, start, end) {
-  return d >= start && d <= end;
-}
-
-// 获取日期范围内的索引
-function getDateIndices(start, end) {
-  return RAW_DATA.dates
-    .map((d, i) => dateInRange(d, start, end) ? i : -1)
-    .filter(i => i >= 0);
-}
-
-// ========== 根据时间范围计算派生数据 ==========
-function computeFilteredData(start, end) {
-  const indices = getDateIndices(start, end);
-  const dates = indices.map(i => RAW_DATA.dates[i]);
-  const dayCount = indices.length;
-
-  // 趋势数据：按索引切片
-  const trendByCategory = RAW_DATA.trendByCategory.map(cat => ({
-    name: cat.name,
-    data: indices.map(i => cat.data[i])
-  }));
-
-  // 每日整体中正率
-  const dailyOverall = indices.map(i => RAW_DATA.dailyOverall[i]);
-  const totalCount = dailyOverall.reduce((s, d) => s + d.count, 0);
-
-  // KPI overview：中正率用真实日均值，其余用概览值 + 基于中正率波动的微调
-  const overallAvg = dailyOverall.reduce((s, d) => s + d.avg, 0) / dayCount;
-  const overallMin = Math.min(...dailyOverall.map(d => d.avg));
-  const overallMax = Math.max(...dailyOverall.map(d => d.avg));
-
-  // 以中正率的变化率为基准，微调其他指标（模拟时间相关性）
-  const baseRatio = overallAvg / RAW_DATA.overview['中正率'].avg;
-
-  const overview = {};
-  RAW_DATA.metricNames.forEach(name => {
-    const raw = RAW_DATA.overview[name];
-    if (name === '中正率') {
-      overview[name] = { avg: overallAvg, max: overallMax, min: overallMin };
-    } else {
-      // 轻微关联中正率变化，保持在合理范围
-      const adjustedAvg = Math.max(5, Math.min(100, raw.avg * (0.85 + baseRatio * 0.3)));
-      overview[name] = { avg: adjustedAvg, max: raw.max, min: raw.min };
-    }
-  });
-
-  // 意图明细数据：使用扩展后的 125 条数据，按日期切片
-  const allIntentData = ALL_INTENTS || RAW_DATA.intentDetailData;
-  const intentDetailData = allIntentData.map(item => {
-    const dailySlice = indices.map(i => item.daily[i]);
-    // 品牌提及率分日切片；若无 dailyBrand 字段则基于各平台均值 + 中正率波动生成
-    const hasDailyBrand = item.dailyBrand && item.dailyBrand.length === item.daily.length;
-    const pkeys = Object.keys(item.platforms);
-    const avgBrand = pkeys.reduce((s, p) => s + item.platforms[p].品牌提及率, 0) / pkeys.length;
-    const avgZZ = pkeys.reduce((s, p) => s + item.platforms[p].中正率, 0) / pkeys.length;
-    const dailyBrandSlice = hasDailyBrand
-      ? indices.map(i => item.dailyBrand[i])
-      : dailySlice.map(zz => {
-          if (zz == null) return null;
-          const delta = (zz - avgZZ) * 0.3;
-          return Math.max(20, Math.min(99, avgBrand + delta));
-        });
-    // 只对有数据的日期计算均值（null 表示该日期无数据）
-    const validDaily = dailySlice.filter(v => v !== null && v !== undefined);
-    const avgZhongzheng = validDaily.length > 0
-      ? validDaily.reduce((s, v) => s + v, 0) / validDaily.length
-      : 0;
-    // 各平台按比例微调（保持原始平台覆盖关系，没有的平台仍然没有）
-    const platforms = {};
-    Object.keys(item.platforms).forEach(pname => {
-      const p = item.platforms[pname];
-      const ratio = 0.88 + baseRatio * 0.22;
-      platforms[pname] = {
-        中正率: Math.max(15, Math.min(100, p.中正率 * ratio)),
-        品牌提及率: Math.max(20, Math.min(100, p.品牌提及率 * (0.92 + baseRatio * 0.15)))
-      };
-    });
-    const platformKeys = Object.keys(platforms);
-    const avgBrandMention = platformKeys.length > 0
-      ? platformKeys.reduce((s, p) => s + platforms[p].品牌提及率, 0) / platformKeys.length
-      : 0;
-    // 品牌提及率分日：按温和比例微调（品牌提及率基数高，避免全部截断到100）
-    const dailyBrandFinal = dailyBrandSlice.map(v => {
-      if (v == null) return null;
-      const adjust = (baseRatio - 1) * 2; // ±2% 范围的微调
-      return Math.max(20, Math.min(99.5, v + adjust));
-    });
-    return {
-      intent: item.intent,
-      category: item.category,
-      platforms,
-      daily: dailySlice,
-      dailyBrand: dailyBrandFinal,
-      dailyByPlatform: item.dailyByPlatform ? Object.fromEntries(
-        Object.entries(item.dailyByPlatform).map(([p, arr]) => [p, indices.map(i => arr[i])])
-      ) : undefined,
-      dailyBrandByPlatform: item.dailyBrandByPlatform ? Object.fromEntries(
-        Object.entries(item.dailyBrandByPlatform).map(([p, arr]) => [p, indices.map(i => arr[i])])
-      ) : undefined,
-      avgZhongzheng,
-      avgBrandMention
-    };
-  });
-
-  // Top/Bottom 10：轻微浮动排序但保持相对关系
-  const jitter = (baseRatio - 1) * 3;
-  const brandJitter = (baseRatio - 1) * 2;
-  const bottom10Intents = RAW_DATA.bottom10Intents.map(d => ({
-    ...d,
-    avg: Math.max(20, Math.min(60, d.avg + jitter)),
-    brandMention: Math.max(20, Math.min(99.5, (d.brandMention || 50) + brandJitter))
-  })).sort((a, b) => a.avg - b.avg);
-
-  const top10Intents = RAW_DATA.top10Intents.map(d => ({
-    ...d,
-    avg: Math.max(50, Math.min(100, d.avg + jitter)),
-    brandMention: Math.max(20, Math.min(99.5, (d.brandMention || 50) + brandJitter))
-  })).sort((a, b) => b.avg - a.avg);
-
-  // 平台对比：基于意图明细数据按平台真实聚合，跟随时间筛选联动
-  const platformMap = {};
-  intentDetailData.forEach(item => {
-    Object.keys(item.platforms).forEach(pname => {
-      if (!platformMap[pname]) {
-        platformMap[pname] = { 中正率: 0, 品牌提及率: 0, count: 0 };
-      }
-      platformMap[pname].中正率 += item.platforms[pname].中正率;
-      platformMap[pname].品牌提及率 += item.platforms[pname].品牌提及率;
-      platformMap[pname].count += 1;
-    });
-  });
-  const platformComparison = Object.keys(platformMap).map(name => {
-    const p = platformMap[name];
-    return {
-      name,
-      中正率: p.count > 0 ? p.中正率 / p.count : 0,
-      品牌提及率: p.count > 0 ? p.品牌提及率 / p.count : 0,
-      count: p.count
-    };
-  });
-
-  return {
-    dates,
-    categories: RAW_DATA.categories,
-    metricNames: RAW_DATA.metricNames,
-    overview,
-    totalRecords: totalCount,
-    totalIntents: RAW_DATA.totalIntents,
-    trendByCategory,
-    platformComparison,
-    bottom10Intents,
-    top10Intents,
-    intentDetailData,
-    dailyOverall,
-    dayCount
-  };
-}
-
-// ========== KPI 卡片渲染 ==========
-function renderKPIs(data) {
-  const kpiDefs = [
-    { key: '品牌提及率', color: COLORS.cat['品牌类意图'] },
-    { key: '中正率', color: COLORS.good }
-  ];
-
-  const row = document.getElementById('kpiRow');
-  row.innerHTML = kpiDefs.map((k, i) => `
-    <div class="kpi-card" style="--kpi-color: ${k.color};">
-      <div class="kpi-label">
-        <span class="icon-dot"></span>
-        ${k.key}
-      </div>
-      <div class="kpi-value">${fmt(data.overview[k.key].avg)}<span class="unit">%</span></div>
-      <div class="kpi-meta">
-        <span>区间</span>
-        <span class="range">
-          <span class="max">↑${fmt(data.overview[k.key].max)}</span>
-          <span class="min">↓${fmt(data.overview[k.key].min)}</span>
-        </span>
-      </div>
-      <div class="kpi-spark" id="spark-${i}"></div>
-    </div>
-  `).join('');
-
-  kpiDefs.forEach((k, i) => {
-    const el = document.getElementById(`spark-${i}`);
-    let sparkData;
-    if (k.key === '中正率') {
-      sparkData = data.dailyOverall.map(d => d.avg);
-    } else {
-      const base = data.overview[k.key].avg;
-      sparkData = data.dates.map((_, idx) => base + Math.sin(idx * 0.8 + i) * 1.2);
-    }
-    const chart = echarts.init(el);
-    charts[`spark-${i}`] = chart;
-    chart.setOption({
-      grid: { left: 0, right: 0, top: 2, bottom: 0 },
-      xAxis: { type: 'category', show: false, data: data.dates },
-      yAxis: { type: 'value', show: false, min: 'dataMin' },
-      series: [{
-        type: 'line',
-        data: sparkData,
-        smooth: true,
-        symbol: 'none',
-        lineStyle: { color: k.color, width: 1.5 },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: k.color + '30' },
-            { offset: 1, color: k.color + '05' }
-          ])
-        }
-      }],
-      tooltip: {
-        show: true,
-        trigger: 'axis',
-        formatter: (params) => `${params[0].axisValue}<br/>${k.key}: ${fmt(params[0].value)}%`,
-        backgroundColor: '#1C1F26',
-        borderColor: 'transparent',
-        textStyle: { color: '#fff', fontSize: 11 }
-      }
-    });
-    new ResizeObserver(() => chart.resize()).observe(el);
-  });
-}
-
-// ========== 趋势图 ==========
-function renderTrendChart(data) {
-  const dates = data.dates.map(shortDate);
-  const chart = charts.trend || echarts.init(document.getElementById('trendChart'));
-  charts.trend = chart;
-
-  chart.setOption({
-    grid: { left: 48, right: 24, top: 40, bottom: 28 },
-    tooltip: {
-      trigger: 'axis',
-      backgroundColor: '#1C1F26',
-      borderColor: 'transparent',
-      textStyle: { color: '#fff', fontSize: 12 },
-      formatter: (params) => {
-        let html = `<div style="font-weight:600;margin-bottom:6px;">${params[0].axisValue}</div>`;
-        params.forEach(p => {
-          html += `<div style="display:flex;align-items:center;gap:8px;margin:3px 0;">
-            <span style="width:8px;height:8px;border-radius:50%;background:${p.color};display:inline-block;"></span>
-            <span>${p.seriesName}</span>
-            <span style="margin-left:auto;font-weight:600;font-variant-numeric:tabular-nums;">${fmt(p.value)}%</span>
-          </div>`;
-        });
-        return html;
-      }
+const RAW_DATA = {
+  "dates": [
+    "2026-07-22",
+    "2026-07-23",
+    "2026-07-24",
+    "2026-07-25",
+    "2026-07-26",
+    "2026-07-27",
+    "2026-07-28",
+    "2026-07-29"
+  ],
+  "categories": [
+    "品牌类意图",
+    "品类意图",
+    "小森林产品类意图",
+    "竞对类意图"
+  ],
+  "overview": {
+    "品牌提及率": {
+      "avg": 79.74,
+      "max": 100.0,
+      "min": 0.0
     },
-    legend: {
-      data: data.categories,
-      top: 0,
-      right: 0,
-      itemWidth: 10,
-      itemHeight: 10,
-      itemGap: 16,
-      textStyle: { color: COLORS.ink3, fontSize: 12 },
-      icon: 'roundRect'
+    "中正率": {
+      "avg": 52.6,
+      "max": 100.0,
+      "min": 24.1
     },
+    "内容风险严重度": {
+      "avg": 44.67,
+      "max": 100.0,
+      "min": 5.0
+    },
+    "品牌归属明确度": {
+      "avg": 48.08,
+      "max": 100.0,
+      "min": 5.0
+    },
+    "信息平衡程度": {
+      "avg": 59.9,
+      "max": 100.0,
+      "min": 28.0
+    },
+    "风险表达强度": {
+      "avg": 61.84,
+      "max": 100.0,
+      "min": 8.0
+    }
+  },
+  "totalRecords": 3986,
+  "totalIntents": 125,
+  "trendByCategory": [
+    {
+      "name": "品牌类意图",
+      "data": [
+        51.08,
+        52.14,
+        52.73,
+        52.41,
+        51.34,
+        51.55,
+        50.85,
+        52.83
+      ]
+    },
+    {
+      "name": "品类意图",
+      "data": [
+        53.9,
+        54.34,
+        51.01,
+        52.24,
+        53.66,
+        53.97,
+        54.56,
+        51.3
+      ]
+    },
+    {
+      "name": "小森林产品类意图",
+      "data": [
+        50.58,
+        49.4,
+        50.13,
+        47.98,
+        48.65,
+        50.51,
+        49.38,
+        49.72
+      ]
+    },
+    {
+      "name": "竞对类意图",
+      "data": [
+        57.61,
+        53.35,
+        54.44,
+        54.74,
+        56.25,
+        55.7,
+        54.82,
+        56.13
+      ]
+    }
+  ],
+  "platformComparison": [
+    {
+      "name": "豆包",
+      "中正率": 59.43,
+      "品牌提及率": 77.4,
+      "内容风险严重度": 53.76,
+      "count": 992
+    },
+    {
+      "name": "通义千问",
+      "中正率": 52.31,
+      "品牌提及率": 77.53,
+      "内容风险严重度": 43.15,
+      "count": 998
+    },
+    {
+      "name": "DeepSeek",
+      "中正率": 50.0,
+      "品牌提及率": 80.71,
+      "内容风险严重度": 42.53,
+      "count": 998
+    },
+    {
+      "name": "元宝",
+      "中正率": 48.68,
+      "品牌提及率": 83.31,
+      "内容风险严重度": 39.29,
+      "count": 998
+    }
+  ],
+  "categoryDistribution": [
+    {
+      "name": "品类意图",
+      "value": 1599,
+      "percent": 40.12
+    },
+    {
+      "name": "品牌类意图",
+      "value": 800,
+      "percent": 20.07
+    },
+    {
+      "name": "小森林产品类意图",
+      "value": 800,
+      "percent": 20.07
+    },
+    {
+      "name": "竞对类意图",
+      "value": 787,
+      "percent": 19.74
+    }
+  ],
+  "radarData": [
+    {
+      "name": "品牌类意图",
+      "品牌提及率": 98.79,
+      "中正率": 51.87,
+      "内容风险严重度": 43.09,
+      "品牌归属明确度": 41.4,
+      "信息平衡程度": 64.29,
+      "风险表达强度": 62.16
+    },
+    {
+      "name": "品类意图",
+      "品牌提及率": 52.76,
+      "中正率": 53.12,
+      "内容风险严重度": 44.79,
+      "品牌归属明确度": 56.05,
+      "信息平衡程度": 56.45,
+      "风险表达强度": 60.61
+    },
+    {
+      "name": "小森林产品类意图",
+      "品牌提及率": 96.16,
+      "中正率": 49.54,
+      "内容风险严重度": 41.9,
+      "品牌归属明确度": 38.9,
+      "信息平衡程度": 59.64,
+      "风险表达强度": 60.94
+    },
+    {
+      "name": "竞对类意图",
+      "品牌提及率": 98.5,
+      "中正率": 55.37,
+      "内容风险严重度": 48.84,
+      "品牌归属明确度": 48.03,
+      "信息平衡程度": 62.72,
+      "风险表达强度": 64.94
+    }
+  ],
+  "bottom10Intents": [
+    {
+      "intent": "纸尿裤甲酰胺风波反转了是怎么回事？",
+      "category": "品类意图",
+      "avg": 38.03,
+      "count": 32
+    },
+    {
+      "intent": "好奇小森林纸尿裤甲酰胺风波反转了是怎么回事？",
+      "category": "小森林产品类意图",
+      "avg": 38.7,
+      "count": 32
+    },
+    {
+      "intent": "好奇小森林纸尿裤安全事件到底怎么回事？",
+      "category": "小森林产品类意图",
+      "avg": 38.78,
+      "count": 32
+    },
+    {
+      "intent": "好奇小森林纸尿裤被曝检出甲酰胺是真的吗？",
+      "category": "小森林产品类意图",
+      "avg": 38.84,
+      "count": 32
+    },
+    {
+      "intent": "好奇小森林甲酰胺事件是怎么回事？",
+      "category": "小森林产品类意图",
+      "avg": 39.38,
+      "count": 32
+    },
+    {
+      "intent": "好奇纸尿裤甲酰胺风波反转了是怎么回事？",
+      "category": "品牌类意图",
+      "avg": 39.71,
+      "count": 32
+    },
+    {
+      "intent": "纸尿裤被曝有安全问题是真的吗？",
+      "category": "品类意图",
+      "avg": 40.08,
+      "count": 32
+    },
+    {
+      "intent": "好奇小森林纸尿裤有没有质量问题？",
+      "category": "小森林产品类意图",
+      "avg": 40.14,
+      "count": 32
+    },
+    {
+      "intent": "纸尿裤甲酰胺事件是怎么回事？",
+      "category": "品类意图",
+      "avg": 40.53,
+      "count": 32
+    },
+    {
+      "intent": "好奇纸尿裤安全事件到底怎么回事？",
+      "category": "品牌类意图",
+      "avg": 40.63,
+      "count": 32
+    }
+  ],
+  "top10Intents": [
+    {
+      "intent": "好奇纸尿裤检测报告在哪里可以看？",
+      "category": "品牌类意图",
+      "avg": 90.15,
+      "count": 32
+    },
+    {
+      "intent": "哪些纸尿裤不含甲酰胺？",
+      "category": "品类意图",
+      "avg": 82.88,
+      "count": 32
+    },
+    {
+      "intent": "好奇小森林纸尿裤检测报告在哪里可以看？",
+      "category": "小森林产品类意图",
+      "avg": 82.01,
+      "count": 32
+    },
+    {
+      "intent": "哪些纸尿裤通过了第三方安全检测？",
+      "category": "品类意图",
+      "avg": 81.31,
+      "count": 32
+    },
+    {
+      "intent": "好奇纸尿裤复检结果出来了吗？",
+      "category": "品牌类意图",
+      "avg": 79.6,
+      "count": 32
+    },
+    {
+      "intent": "好奇纸尿裤有第三方检测报告吗？",
+      "category": "品牌类意图",
+      "avg": 76.05,
+      "count": 32
+    },
+    {
+      "intent": "纸尿裤甲酰胺事件第三方复检结果是什么？",
+      "category": "品类意图",
+      "avg": 75.43,
+      "count": 32
+    },
+    {
+      "intent": "好奇和妈咪宝贝哪个检测报告更透明？",
+      "category": "竞对类意图",
+      "avg": 70.89,
+      "count": 32
+    },
+    {
+      "intent": "纸尿裤有没有质检报告可以查？",
+      "category": "品类意图",
+      "avg": 70.52,
+      "count": 32
+    },
+    {
+      "intent": "好奇和雀氏哪个甲酰胺检测结果更好？",
+      "category": "竞对类意图",
+      "avg": 68.79,
+      "count": 32
+    }
+  ],
+  "heatmapData": [
+    {
+      "category": "品牌类意图",
+      "品牌提及率": 98.79,
+      "中正率": 51.87,
+      "内容风险严重度": 43.09,
+      "品牌归属明确度": 41.4,
+      "信息平衡程度": 64.29,
+      "风险表达强度": 62.16
+    },
+    {
+      "category": "品类意图",
+      "品牌提及率": 52.76,
+      "中正率": 53.12,
+      "内容风险严重度": 44.79,
+      "品牌归属明确度": 56.05,
+      "信息平衡程度": 56.45,
+      "风险表达强度": 60.61
+    },
+    {
+      "category": "小森林产品类意图",
+      "品牌提及率": 96.16,
+      "中正率": 49.54,
+      "内容风险严重度": 41.9,
+      "品牌归属明确度": 38.9,
+      "信息平衡程度": 59.64,
+      "风险表达强度": 60.94
+    },
+    {
+      "category": "竞对类意图",
+      "品牌提及率": 98.5,
+      "中正率": 55.37,
+      "内容风险严重度": 48.84,
+      "品牌归属明确度": 48.03,
+      "信息平衡程度": 62.72,
+      "风险表达强度": 64.94
+    }
+  ],
+  "dailyOverall": [
+    {
+      "date": "2026-07-22",
+      "avg": 53.34,
+      "count": 492
+    },
+    {
+      "date": "2026-07-23",
+      "avg": 52.71,
+      "count": 497
+    },
+    {
+      "date": "2026-07-24",
+      "avg": 51.85,
+      "count": 497
+    },
+    {
+      "date": "2026-07-25",
+      "avg": 51.92,
+      "count": 500
+    },
+    {
+      "date": "2026-07-26",
+      "avg": 52.71,
+      "count": 500
+    },
+    {
+      "date": "2026-07-27",
+      "avg": 53.14,
+      "count": 500
+    },
+    {
+      "date": "2026-07-28",
+      "avg": 52.83,
+      "count": 500
+    },
+    {
+      "date": "2026-07-29",
+      "avg": 52.26,
+      "count": 500
+    }
+  ],
+  "metricNames": [
+    "品牌提及率",
+    "中正率",
+    "内容风险严重度",
+    "品牌归属明确度",
+    "信息平衡程度",
+    "风险表达强度"
+  ]
+};
+
+function renderDashboard(data) {
+  // 渲染统计卡片
+  document.getElementById('stat-brand').textContent = `${data.overview['品牌提及率'].avg.toFixed(1)}%`;
+  document.getElementById('stat-avg').textContent = `${data.overview['中正率'].avg.toFixed(1)}%`;
+
+  // 渲染趋势图
+  const chart = echarts.init(document.getElementById('main-chart'));
+  const option = {
+    tooltip: { trigger: 'axis' },
+    legend: { show: false },
+    grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
     xAxis: {
       type: 'category',
-      data: dates,
       boundaryGap: false,
-      axisLine: { lineStyle: { color: COLORS.line } },
-      axisTick: { show: false },
-      axisLabel: { color: COLORS.ink3, fontSize: 11, fontVariant: 'tabular-nums' }
+      data: data.dates
     },
     yAxis: {
       type: 'value',
       min: 40,
       max: 65,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      splitLine: { lineStyle: { color: COLORS.line, type: 'dashed' } },
-      axisLabel: { color: COLORS.ink4, fontSize: 11, formatter: '{value}%', fontVariant: 'tabular-nums' }
-    },
-    series: data.trendByCategory.map((cat) => ({
-      name: cat.name,
-      type: 'line',
-      data: cat.data,
-      smooth: true,
-      symbol: 'circle',
-      symbolSize: 5,
-      showSymbol: false,
-      emphasis: { focus: 'series', scale: 1.3 },
-      lineStyle: { width: 2, color: COLORS.cat[cat.name] },
-      itemStyle: { color: COLORS.cat[cat.name], borderWidth: 2, borderColor: '#fff' }
-    }))
-  }, true);
-  if (!charts._trendRO) {
-    new ResizeObserver(() => chart.resize()).observe(document.getElementById('trendChart'));
-    charts._trendRO = true;
-  }
-}
-
-// ========== 平台对比图 ==========
-function renderPlatformChart(data) {
-  const chart = charts.platform || echarts.init(document.getElementById('platformChart'));
-  charts.platform = chart;
-
-  const platforms = data.platformComparison.slice().sort((a, b) => b.中正率 - a.中正率);
-  const names = platforms.map(p => p.name);
-
-  chart.setOption({
-    grid: { left: 80, right: 60, top: 36, bottom: 24 },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: { type: 'shadow' },
-      backgroundColor: '#1C1F26',
-      borderColor: 'transparent',
-      textStyle: { color: '#fff', fontSize: 12 },
-      formatter: (params) => {
-        const p = platforms.find(x => x.name === params[0].name);
-        return `<div style="font-weight:600;margin-bottom:6px;">${p.name}</div>
-          <div style="display:flex;gap:12px;font-size:11px;">
-            <span>中正率: <strong>${fmt(p.中正率)}%</strong></span>
-            <span>品牌提及率: <strong>${fmt(p.品牌提及率)}%</strong></span>
-          </div>
-          <div style="font-size:11px;margin-top:4px;color:#aaa;">样本 ${p.count} 条</div>`;
-      }
-    },
-    legend: {
-      data: ['中正率', '品牌提及率'],
-      top: 0,
-      right: 0,
-      itemWidth: 10,
-      itemHeight: 10,
-      itemGap: 14,
-      textStyle: { color: COLORS.ink3, fontSize: 11.5 },
-      icon: 'roundRect'
-    },
-    yAxis: {
-      type: 'category',
-      data: names,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: {
-        color: COLORS.ink2,
-        fontSize: 12,
-        fontWeight: 500
-      }
-    },
-    xAxis: {
-      type: 'value',
-      min: 0,
-      max: 100,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      splitLine: { lineStyle: { color: COLORS.line, type: 'dashed' } },
-      axisLabel: { color: COLORS.ink4, fontSize: 11, formatter: '{value}%', fontVariant: 'tabular-nums' }
+      axisLabel: { formatter: '{value}%' }
     },
     series: [
       {
-        name: '中正率',
-        type: 'bar',
-        data: platforms.map(p => p.中正率),
-        barWidth: 10,
-        itemStyle: { color: COLORS.good, borderRadius: [0, 4, 4, 0] },
-        label: {
-          show: true,
-          position: 'right',
-          formatter: (p) => fmt(p.value) + '%',
-          color: COLORS.ink2,
-          fontSize: 11.5,
-          fontWeight: 600,
-          fontVariant: 'tabular-nums'
-        }
+        name: '品牌类意图',
+        type: 'line',
+        data: data.trendByCategory[0].data,
+        lineStyle: { color: '#165DFF' },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0, color: 'rgba(22, 93, 255, 0.3)'}, {offset: 1, color: 'rgba(22, 93, 255, 0.05)'}]) }
       },
       {
-        name: '品牌提及率',
-        type: 'bar',
-        data: platforms.map(p => p.品牌提及率),
-        barWidth: 10,
-        itemStyle: { color: COLORS.cat['品牌类意图'], borderRadius: [0, 4, 4, 0], opacity: 0.7 },
-        label: {
-          show: true,
-          position: 'right',
-          formatter: (p) => fmt(p.value) + '%',
-          color: COLORS.ink2,
-          fontSize: 11.5,
-          fontWeight: 600,
-          fontVariant: 'tabular-nums'
-        },
-        barGap: '50%'
+        name: '品类意图',
+        type: 'line',
+        data: data.trendByCategory[1].data,
+        lineStyle: { color: '#8B6F4E' },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0, color: 'rgba(139, 111, 78, 0.3)'}, {offset: 1, color: 'rgba(139, 111, 78, 0.05)'}]) }
+      },
+      {
+        name: '小森林产品类意图',
+        type: 'line',
+        data: data.trendByCategory[2].data,
+        lineStyle: { color: '#2E7D32' },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0, color: 'rgba(46, 125, 50, 0.3)'}, {offset: 1, color: 'rgba(46, 125, 50, 0.05)'}]) }
+      },
+      {
+        name: '竞对类意图',
+        type: 'line',
+        data: data.trendByCategory[3].data,
+        lineStyle: { color: '#D32F2F' },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0, color: 'rgba(211, 47, 47, 0.3)'}, {offset: 1, color: 'rgba(211, 47, 47, 0.05)'}]) }
       }
     ]
-  }, true);
-  if (!charts._platformRO) {
-    new ResizeObserver(() => chart.resize()).observe(document.getElementById('platformChart'));
-    charts._platformRO = true;
-  }
-}
-
-// ========== 排名表 ==========
-function catShortName(cat) {
-  const map = {
-    '品牌类意图': '品牌',
-    '品类意图': '品类',
-    '小森林产品类意图': '小森林',
-    '竞对类意图': '竞对'
   };
-  return map[cat] || cat;
+  chart.setOption(option);
+  window.addEventListener('resize', () => chart.resize());
 }
 
-function renderRankTable(tableId, data, isBottom) {
-  const tbody = document.querySelector(`#${tableId} tbody`);
-  tbody.innerHTML = data.map((item, i) => `
-    <tr>
-      <td><span class="rank-num ${i < 3 ? 'top3' : ''}">${i + 1}</span></td>
-      <td><div class="rank-intent" title="${item.intent}">${item.intent}</div></td>
-      <td>
-        <span class="rank-cat" style="background: ${COLORS.cat[item.category]}20; color: ${COLORS.cat[item.category]};">
-          ${catShortName(item.category)}
-        </span>
-      </td>
-      <td class="rank-score" style="text-align: right;">${fmt(item.avg)}<span class="unit">%</span></td>
-      <td class="rank-score" style="text-align: right; color: ${COLORS.cat['品牌类意图']};">${fmt(item.brandMention)}<span class="unit">%</span></td>
-    </tr>
-  `).join('');
-}
-
-// ========== 意图数据明细 ==========
-const detailState = {
-  intent: 'all',
-  platform: 'all',
-  startDate: null,
-  endDate: null,
-  expanded: false
-};
-
-function renderIntentDetail(data) {
-  // 初始化意图下拉
-  const sel = document.getElementById('intentSelect');
-  if (sel.options.length <= 1) {
-    data.intentDetailData.forEach(item => {
-      const opt = document.createElement('option');
-      opt.value = item.intent;
-      opt.textContent = item.intent;
-      sel.appendChild(opt);
-    });
-  }
-
-  // 绑定事件（只绑一次）
-  if (!charts._detailBound) {
-    document.getElementById('intentSelect').addEventListener('change', (e) => {
-      detailState.intent = e.target.value;
-      updateDetailView();
-    });
-    // 平台筛选下拉
-    document.getElementById('platformSelect').addEventListener('change', (e) => {
-      detailState.platform = e.target.value;
-      updateDetailView();
-    });
-    // 时间筛选
-    const timeBtns = document.querySelectorAll('#detailTimeFilter .time-pill');
-    timeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        timeBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const range = btn.dataset.range;
-        const allDates = RAW_DATA.dates;
-        if (range === 'all') {
-          detailState.startDate = allDates[0];
-          detailState.endDate = allDates[allDates.length - 1];
-          document.getElementById('detailDateStart').value = detailState.startDate;
-          document.getElementById('detailDateEnd').value = detailState.endDate;
-        } else if (range === '7d') {
-          detailState.startDate = allDates[allDates.length - 7];
-          detailState.endDate = allDates[allDates.length - 1];
-          document.getElementById('detailDateStart').value = detailState.startDate;
-          document.getElementById('detailDateEnd').value = detailState.endDate;
-        }
-        updateDetailView();
-      });
-    });
-    // 自定义日期
-    function onDetailDateChange() {
-      let s = document.getElementById('detailDateStart').value;
-      let e = document.getElementById('detailDateEnd').value;
-      const min = RAW_DATA.dates[0];
-      const max = RAW_DATA.dates[RAW_DATA.dates.length - 1];
-      if (s < min) s = min;
-      if (e > max) e = max;
-      if (s > e) { [s, e] = [e, s]; document.getElementById('detailDateStart').value = s; document.getElementById('detailDateEnd').value = e; }
-      detailState.startDate = s;
-      detailState.endDate = e;
-      timeBtns.forEach(b => b.classList.remove('active'));
-      document.querySelector('#detailTimeFilter .time-pill[data-range="custom"]').classList.add('active');
-      updateDetailView();
-    }
-    document.getElementById('detailDateStart').addEventListener('change', onDetailDateChange);
-    document.getElementById('detailDateEnd').addEventListener('change', onDetailDateChange);
-    
-    // 展开/收起按钮
-    document.getElementById('expandBtn').addEventListener('click', () => {
-      detailState.expanded = !detailState.expanded;
-      const btn = document.getElementById('expandBtn');
-      const textEl = btn.querySelector('span:first-child');
-      const countEl = btn.querySelector('.count');
-      if (detailState.expanded) {
-        btn.classList.add('expanded');
-        textEl.textContent = '收起';
-        countEl.textContent = '';
-      } else {
-        btn.classList.remove('expanded');
-        textEl.textContent = '展开全部';
-        countEl.textContent = '(共 125 条)';
-      }
-      updateDetailView();
-    });
-    
-    charts._detailBound = true;
-  }
-
-  // 初始化 detailState 的时间范围（首次加载默认全部）
-  if (detailState.startDate === null) {
-    const allDates = RAW_DATA.dates;
-    detailState.startDate = allDates[0];
-    detailState.endDate = allDates[allDates.length - 1];
-    document.getElementById('detailDateStart').value = detailState.startDate;
-    document.getElementById('detailDateEnd').value = detailState.endDate;
-    // 默认高亮全部按钮
-    document.querySelectorAll('#detailTimeFilter .time-pill').forEach(b => b.classList.remove('active'));
-    document.querySelector('#detailTimeFilter .time-pill[data-range="all"]').classList.add('active');
-  }
-
-  updateDetailView();
-}
-
-function updateDetailView() {
-  // 从全局 data 中获取意图明细（已按顶部时间范围过滤）
-  // 再叠加 detailState 的平台和意图筛选
-  const data = computeFilteredData(detailState.startDate, detailState.endDate);
-  let list = data.intentDetailData;
-
-  // 意图筛选
-  if (detailState.intent !== 'all') {
-    list = list.filter(item => item.intent === detailState.intent);
-  }
-
-  // 平台筛选：过滤掉在该平台无数据的意图，并计算指标
-  const platformFilter = detailState.platform;
-  const tableData = list.filter(item => {
-    // 平台筛选：如果指定了单个平台，该意图必须在这个平台有数据
-    if (platformFilter !== 'all' && !item.platforms[platformFilter]) {
-      return false;
-    }
-    // 时间筛选：该意图在当前时间范围内必须有至少一天的数据
-    const hasValidDaily = item.daily && item.daily.some(v => v !== null && v !== undefined);
-    return hasValidDaily;
-  }).map(item => {
-    let zhongzheng, brandMention;
-    if (platformFilter === 'all') {
-      const pkeys = Object.keys(item.platforms);
-      zhongzheng = pkeys.reduce((s, p) => s + item.platforms[p].中正率, 0) / pkeys.length;
-      brandMention = pkeys.reduce((s, p) => s + item.platforms[p].品牌提及率, 0) / pkeys.length;
-    } else {
-      zhongzheng = item.platforms[platformFilter].中正率;
-      brandMention = item.platforms[platformFilter].品牌提及率;
-    }
-    return {
-      intent: item.intent,
-      category: item.category,
-      中正率: zhongzheng,
-      品牌提及率: brandMention,
-      daily: item.daily,
-      dailyBrand: item.dailyBrand
-    };
-  }).sort((a, b) => a.中正率 - b.中正率);
-
-  // 渲染表格：全部意图状态下默认前 10 条 + 展开按钮；单意图或已展开则显示全部
-  const showAll = detailState.intent !== 'all' || detailState.expanded;
-  const displayData = showAll ? tableData : tableData.slice(0, 10);
-  
-  const tbody = document.querySelector('#detailTable tbody');
-  tbody.innerHTML = displayData.map((item, i) => `
-    <tr>
-      <td><span class="rank-num ${i < 3 ? 'top3' : ''}">${i + 1}</span></td>
-      <td><div class="detail-intent" title="${item.intent}">${item.intent}</div></td>
-      <td>
-        <span class="detail-cat" style="background: ${COLORS.cat[item.category]}20; color: ${COLORS.cat[item.category]};">
-          ${catShortName(item.category)}
-        </span>
-      </td>
-      <td class="detail-score" style="color: ${item.中正率 < 50 ? COLORS.risk : COLORS.good};">
-        ${fmt(item.中正率)}<span class="unit">%</span>
-      </td>
-      <td class="detail-score" style="color: ${COLORS.cat['品牌类意图']};">
-        ${fmt(item.品牌提及率)}<span class="unit">%</span>
-      </td>
-    </tr>
-  `).join('');
-  
-  // 控制展开按钮显示：只有在「全部意图」且数据超过 10 条时才显示
-  const expandRow = document.getElementById('expandRow');
-  if (detailState.intent === 'all' && tableData.length > 10) {
-    expandRow.style.display = 'flex';
-    const btn = document.getElementById('expandBtn');
-    const textEl = btn.querySelector('span:first-child');
-    const countEl = btn.querySelector('.count');
-    if (detailState.expanded) {
-      btn.classList.add('expanded');
-      textEl.textContent = '收起';
-      countEl.textContent = '';
-    } else {
-      btn.classList.remove('expanded');
-      textEl.textContent = '展开全部';
-      countEl.textContent = `(共 ${tableData.length} 条)`;
-    }
-  } else {
-    expandRow.style.display = 'none';
-  }
-
-  // 渲染分日趋势图
-  const chartEl = document.getElementById('detailTrendChart');
-  const chart = charts.detailTrend || echarts.init(chartEl);
-  charts.detailTrend = chart;
-
-  // 如果选中了单个意图，显示该意图的分日趋势；否则显示整体趋势
-  // 平台筛选时，分日趋势取该平台对应的数据（单意图）或该平台下所有意图的均值（全部意图）
-  let trendDataZZ, trendDataBrand, trendLabel;
-  const platFilter = detailState.platform;
-  if (detailState.intent !== 'all' && tableData.length > 0) {
-    const item = tableData[0];
-    if (platFilter === 'all') {
-      // 全部平台：显示整体均值趋势
-      trendDataZZ = item.daily;
-      trendDataBrand = item.dailyBrand;
-    } else {
-      // 单个平台：显示该平台的分日趋势
-      // 从 ALL_INTENTS 中找到该意图的该平台原始 daily 数据
-      const fullItem = (ALL_INTENTS || RAW_DATA.intentDetailData).find(x => x.intent === detailState.intent);
-      if (fullItem && fullItem.dailyByPlatform && fullItem.dailyByPlatform[platFilter]) {
-        // 有按平台存储的分日数据，直接使用
-        const platDaily = fullItem.dailyByPlatform[platFilter];
-        const indices = getDateIndices(detailState.startDate, detailState.endDate);
-        trendDataZZ = indices.map(i => platDaily[i]);
-        // 品牌提及率分日：从 dailyBrandByPlatform 取
-        if (fullItem.dailyBrandByPlatform && fullItem.dailyBrandByPlatform[platFilter]) {
-          const platDailyBrand = fullItem.dailyBrandByPlatform[platFilter];
-          trendDataBrand = indices.map(i => platDailyBrand[i]);
-        } else {
-          // 没有则用该平台品牌提及率均值 + 中正率波动生成
-          const platBrand = item.platforms ? item.platforms[platFilter]?.品牌提及率 : item.品牌提及率;
-          const platZZ = item.中正率;
-          trendDataBrand = trendDataZZ.map(zz => {
-            if (zz == null) return null;
-            const delta = (zz - platZZ) * 0.3;
-            return Math.max(20, Math.min(99, platBrand + delta));
-          });
-        }
-      } else {
-        // 没有按平台分日数据时，退化为整体趋势（保持不变）
-        trendDataZZ = item.daily;
-        trendDataBrand = item.dailyBrand;
-      }
-    }
-    trendLabel = detailState.intent.length > 20 ? detailState.intent.slice(0, 20) + '...' : detailState.intent;
-  } else {
-    // 全部意图时
-    if (platFilter === 'all') {
-      // 全部平台：显示整体中正率分日趋势
-      trendDataZZ = data.dailyOverall.map(d => d.avg);
-      const avgBrandMention = data.overview['品牌提及率'].avg;
-      const avgZZ = data.overview['中正率'].avg;
-      trendDataBrand = trendDataZZ.map(zz => {
-        if (zz == null) return null;
-        const delta = (zz - avgZZ) * 0.3;
-        return Math.max(20, Math.min(99, avgBrandMention + delta));
-      });
-    } else {
-      // 单个平台：计算该平台下所有意图的每日均值
-      const allData = ALL_INTENTS || RAW_DATA.intentDetailData;
-      const indices = getDateIndices(detailState.startDate, detailState.endDate);
-      const numDays = indices.length;
-      const dailyZZ = new Array(numDays).fill(0);
-      const dailyBrand = new Array(numDays).fill(0);
-      const dailyCount = new Array(numDays).fill(0);
-      
-      allData.forEach(item => {
-        if (!item.platforms || !item.platforms[platFilter]) return;
-        // 使用该平台的分日数据（若有），否则用整体 daily 近似
-        let platDailyZZ, platDailyBrand;
-        if (item.dailyByPlatform && item.dailyByPlatform[platFilter]) {
-          platDailyZZ = item.dailyByPlatform[platFilter];
-        } else {
-          platDailyZZ = item.daily;
-        }
-        if (item.dailyBrandByPlatform && item.dailyBrandByPlatform[platFilter]) {
-          platDailyBrand = item.dailyBrandByPlatform[platFilter];
-        } else {
-          platDailyBrand = item.dailyBrand || [];
-        }
-        
-        indices.forEach((idx, di) => {
-          const zzVal = platDailyZZ[idx];
-          if (zzVal != null) {
-            dailyZZ[di] += zzVal;
-            dailyCount[di] += 1;
-          }
-          const bVal = platDailyBrand[idx];
-          if (bVal != null) {
-            dailyBrand[di] += bVal;
-          }
-        });
-      });
-      
-      trendDataZZ = dailyZZ.map((v, i) => dailyCount[i] > 0 ? v / dailyCount[i] : null);
-      trendDataBrand = dailyBrand.map((v, i) => dailyCount[i] > 0 ? v / dailyCount[i] : null);
-    }
-    trendLabel = platFilter === 'all' ? '整体趋势' : platFilter + ' 平台趋势';
-  }
-
-  const dates = data.dates.map(shortDate);
-
-  chart.setOption({
-    grid: { left: 48, right: 24, top: 44, bottom: 28 },
-    tooltip: {
-      trigger: 'axis',
-      backgroundColor: '#1C1F26',
-      borderColor: 'transparent',
-      textStyle: { color: '#fff', fontSize: 12 },
-      formatter: (params) => {
-        let html = `<div style="font-weight:600;margin-bottom:6px;">${params[0].axisValue}</div>`;
-        params.forEach(p => {
-          html += `<div style="display:flex;align-items:center;gap:8px;margin:3px 0;">
-            <span style="width:8px;height:8px;border-radius:50%;background:${p.color};display:inline-block;"></span>
-            <span>${p.seriesName}</span>
-            <span style="margin-left:auto;font-weight:600;font-variant-numeric:tabular-nums;">${fmt(p.value)}%</span>
-          </div>`;
-        });
-        return html;
-      }
-    },
-    legend: {
-      show: true,
-      top: 4,
-      right: 0,
-      itemWidth: 10,
-      itemHeight: 10,
-      itemGap: 16,
-      textStyle: { color: COLORS.ink3, fontSize: 12 },
-      icon: 'roundRect',
-      data: [
-        { name: '中正率', itemStyle: { color: COLORS.good, borderWidth: 0 } },
-        { name: '品牌提及率', itemStyle: { color: COLORS.cat['品牌类意图'], borderWidth: 0 } }
-      ]
-    },
-    xAxis: {
-      type: 'category',
-      data: dates,
-      boundaryGap: false,
-      axisLine: { lineStyle: { color: COLORS.line } },
-      axisTick: { show: false },
-      axisLabel: { color: COLORS.ink3, fontSize: 11, fontVariant: 'tabular-nums' }
-    },
-    yAxis: {
-      type: 'value',
-      min: 0,
-      max: 100,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      splitLine: { lineStyle: { color: COLORS.line, type: 'dashed' } },
-      axisLabel: { color: COLORS.ink4, fontSize: 11, formatter: '{value}%', fontVariant: 'tabular-nums' }
-    },
-    series: [{
-      name: '中正率',
-      type: 'line',
-      data: trendDataZZ,
-      smooth: true,
-      symbol: 'circle',
-      symbolSize: 6,
-      showSymbol: true,
-      lineStyle: { width: 2.5, color: COLORS.good },
-      itemStyle: { color: '#fff', borderColor: COLORS.good, borderWidth: 2 },
-      label: {
-        show: true,
-        position: 'top',
-        formatter: (p) => p.value == null ? '' : fmt(p.value) + '%',
-        color: COLORS.good,
-        fontSize: 11,
-        fontWeight: 600,
-        fontVariant: 'tabular-nums'
-      }
-    }, {
-      name: '品牌提及率',
-      type: 'line',
-      data: trendDataBrand,
-      smooth: true,
-      symbol: 'circle',
-      symbolSize: 6,
-      showSymbol: true,
-      lineStyle: { width: 2.5, color: COLORS.cat['品牌类意图'] },
-      itemStyle: { color: '#fff', borderColor: COLORS.cat['品牌类意图'], borderWidth: 2 },
-      label: {
-        show: true,
-        position: 'bottom',
-        formatter: (p) => p.value == null ? '' : fmt(p.value) + '%',
-        color: COLORS.cat['品牌类意图'],
-        fontSize: 11,
-        fontWeight: 600,
-        fontVariant: 'tabular-nums'
-      }
-    }]
-  }, true);
-
-  if (!charts._detailTrendRO) {
-    new ResizeObserver(() => chart.resize()).observe(chartEl);
-    charts._detailTrendRO = true;
-  }
-}
-
-// ========== 全量更新 ==========
-function updateAll() {
-  const data = computeFilteredData(state.startDate, state.endDate);
-  
-  // 销毁旧的 spark 图表
-  Object.keys(charts).forEach(key => {
-    if (key.startsWith('spark-') || key.startsWith('insight-spark-')) {
-      charts[key].dispose();
-      delete charts[key];
-    }
-  });
-
-  renderKPIs(data);
-  renderTrendChart(data);
-  renderPlatformChart(data);
-  renderRankTable('bottomTable', data.bottom10Intents, true);
-  renderRankTable('topTable', data.top10Intents, false);
-  renderIntentDetail(data);
-}
-
-// ========== 时间选择器逻辑 ==========
-function setupTimeFilter() {
-  const btns = document.querySelectorAll('.time-filter-btn');
-  const dateStart = document.getElementById('dateStart');
-  const dateEnd = document.getElementById('dateEnd');
-  const allDates = RAW_DATA.dates;
-  const minDate = allDates[0];
-  const maxDate = allDates[allDates.length - 1];
-
-  function setActive(btn) {
-    btns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const range = btn.dataset.range;
-      setActive(btn);
-
-      if (range === 'all') {
-        state.startDate = minDate;
-        state.endDate = maxDate;
-        dateStart.value = minDate;
-        dateEnd.value = maxDate;
-        updateAll();
-  // 隐藏加载提示
-  const loadingEl = document.getElementById('page-loading');
-  if (loadingEl) { loadingEl.style.opacity = '0'; setTimeout(() => loadingEl.remove(), 350); }
-
-      } else if (range === '7d') {
-        // 最近 7 天 = 最后 7 天
-        state.startDate = allDates[allDates.length - 7];
-        state.endDate = maxDate;
-        dateStart.value = state.startDate;
-        dateEnd.value = maxDate;
-        updateAll();
-      } else if (range === 'custom') {
-        // 切换到自定义模式，保持当前范围
-        updateAll();
-      }
-    });
-  });
-
-  // 日期输入变化
-  function onDateChange() {
-    let start = dateStart.value;
-    let end = dateEnd.value;
-    
-    // 校验：开始不能早于最小值，结束不能晚于最大值
-    if (start < minDate) start = minDate;
-    if (end > maxDate) end = maxDate;
-    if (start > end) { [start, end] = [end, start]; dateStart.value = start; dateEnd.value = end; }
-    
-    state.startDate = start;
-    state.endDate = end;
-    
-    // 切换到自定义按钮
-    const customBtn = document.querySelector('.time-filter-btn[data-range="custom"]');
-    setActive(customBtn);
-    
-    updateAll();
-  }
-
-  dateStart.addEventListener('change', onDateChange);
-  dateEnd.addEventListener('change', onDateChange);
-}
-
-// ========== 初始化 ==========
-document.addEventListener('DOMContentLoaded', () => {
-  setupTimeFilter();
-  updateAll();
+// 页面加载完成初始化
+window.addEventListener('DOMContentLoaded', () => {
+  renderDashboard(RAW_DATA);
 });
 </script>
 </body>
