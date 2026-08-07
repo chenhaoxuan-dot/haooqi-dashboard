@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>好奇舆情专项数据看板</title>
-<script src="https://sf3-scmcdn-cn.feishucdn.com/obj/feishu-static/miaoda/coding-unpkg-sdk/echarts@5.6.0/dist/echarts.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
   :root {
     /* 基底色 —— 暖灰纸感，避开纯白冷调 */
@@ -1169,6 +1169,18 @@
 </style>
 </head>
 <body>
+<div id="page-loading" style="position:fixed;top:0;left:0;width:100%;height:100%;
+  background:var(--bg,#F5F3EE);display:flex;align-items:center;justify-content:center;
+  z-index:9999;font-family:sans-serif;color:var(--ink-2,#3A3F4A);font-size:16px;
+  transition:opacity 0.3s;">
+  <div style="text-align:center">
+    <div style="font-size:40px;margin-bottom:12px">📊</div>
+    <div>数据看板加载中...</div>
+    <div style="font-size:12px;color:var(--ink-4,#9AA0AB);margin-top:8px">
+      如长时间空白请刷新页面</div>
+  </div>
+</div>
+
 <div class="dashboard">
 
   <!-- ========== 顶部标题栏 ========== -->
@@ -1384,6 +1396,22 @@
 </div>
 
 <script>
+// 全局错误捕获
+window.onerror = function(msg, url, line, col, err) {
+  var el = document.getElementById('page-loading');
+  if (el) {
+    el.innerHTML = '<div style="text-align:center;max-width:500px">' +
+      '<div style="font-size:40px;margin-bottom:12px">⚠️</div>' +
+      '<div style="font-weight:600;margin-bottom:8px">页面加载异常</div>' +
+      '<div style="font-size:12px;color:var(--ink-3,#6B7280);word-break:break-all">' +
+      msg + '</div>' +
+      '<div style="margin-top:12px"><button onclick="location.reload()" ' +
+      'style="padding:8px 20px;background:var(--good,#2E7D5B);color:#fff;border:none;' +
+      'border-radius:6px;cursor:pointer;font-size:14px">刷新页面</button></div></div>';
+  }
+  return false;
+};
+
 // ========== 原始数据 ==========
 const RAW_DATA = {"dates": ["2026-07-22", "2026-07-23", "2026-07-24", "2026-07-25", "2026-07-26", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06"], "categories": ["品牌类意图", "品类意图", "小森林产品类意图", "竞对类意图"], "totalRecords": 7985, "totalIntents": 125, "metricNames": ["品牌提及率", "中正率", "内容风险严重度", "品牌归属明确度", "信息平衡程度", "风险表达强度"], "overview": {"品牌提及率": {"avg": 78.76, "max": 100, "min": 0}, "中正率": {"avg": 52.64, "max": 100, "min": 24.07}, "内容风险严重度": {"avg": 44.77, "max": 100, "min": 5}, "品牌归属明确度": {"avg": 48.35, "max": 100, "min": 5}, "信息平衡程度": {"avg": 59.7, "max": 100, "min": 28}, "风险表达强度": {"avg": 61.87, "max": 100, "min": 8}}, "dailyOverall": [{"date": "2026-07-22", "avg": 53.34, "count": 492}, {"date": "2026-07-23", "avg": 52.71, "count": 497}, {"date": "2026-07-24", "avg": 51.85, "count": 497}, {"date": "2026-07-25", "avg": 51.92, "count": 500}, {"date": "2026-07-26", "avg": 52.71, "count": 500}, {"date": "2026-07-27", "avg": 53.14, "count": 500}, {"date": "2026-07-28", "avg": 52.83, "count": 500}, {"date": "2026-07-29", "avg": 52.26, "count": 500}, {"date": "2026-07-30", "avg": 53.26, "count": 499}, {"date": "2026-07-31", "avg": 52.76, "count": 500}, {"date": "2026-08-01", "avg": 52.59, "count": 500}, {"date": "2026-08-02", "avg": 52.82, "count": 500}, {"date": "2026-08-03", "avg": 52.65, "count": 500}, {"date": "2026-08-04", "avg": 52.56, "count": 500}, {"date": "2026-08-05", "avg": 52.53, "count": 500}, {"date": "2026-08-06", "avg": 52.57, "count": 500}], "trendByCategory": [{"name": "品牌类意图", "data": [51.08, 52.14, 52.73, 52.41, 51.34, 51.55, 50.85, 52.83, 53.1, 52.47, 52.24, 51.35, 51.74, 52.38, 52.68, 52.6]}, {"name": "品类意图", "data": [53.9, 54.34, 51.01, 52.24, 53.66, 53.97, 54.56, 51.3, 53.42, 51.03, 51.81, 53.05, 52.62, 52.14, 52.66, 51.62]}, {"name": "小森林产品类意图", "data": [50.58, 49.4, 50.13, 47.98, 48.65, 50.51, 49.38, 49.72, 48.64, 50.29, 51.14, 48.75, 48.59, 49.28, 48.45, 49.63]}, {"name": "竞对类意图", "data": [57.61, 53.35, 54.44, 54.74, 56.25, 55.7, 54.82, 56.13, 57.73, 58.98, 55.92, 57.89, 57.69, 56.85, 56.19, 57.4]}], "platformComparison": [{"name": "DeepSeek", "中正率": 49.63, "品牌提及率": 81.12, "内容风险严重度": 42.14, "count": 2373}, {"name": "豆包", "中正率": 59.39, "品牌提及率": 73.64, "内容风险严重度": 53.42, "count": 2366}, {"name": "通义千问", "中正率": 52.62, "品牌提及率": 78.12, "内容风险严重度": 43.74, "count": 2373}, {"name": "元宝", "中正率": 48.94, "品牌提及率": 82.26, "内容风险严重度": 39.83, "count": 2373}], "categoryDistribution": [{"name": "品牌类意图", "value": 1899, "percent": 23.78}, {"name": "品类意图", "value": 3799, "percent": 47.58}, {"name": "小森林产品类意图", "value": 1900, "percent": 23.79}, {"name": "竞对类意图", "value": 1887, "percent": 23.63}], "radarData": [{"name": "品牌类意图", "品牌提及率": 98.91, "中正率": 52.12, "内容风险严重度": 43.65, "品牌归属明确度": 41.62, "信息平衡程度": 64.09, "风险表达强度": 62.51}, {"name": "品类意图", "品牌提及率": 50.46, "中正率": 52.66, "内容风险严重度": 44.13, "品牌归属明确度": 55.99, "信息平衡程度": 55.99, "风险表达强度": 60.1}, {"name": "小森林产品类意图", "品牌提及率": 95.99, "中正率": 49.34, "内容风险严重度": 41.83, "品牌归属明确度": 38.69, "信息平衡程度": 59.14, "风险表达强度": 60.9}, {"name": "竞对类意图", "品牌提及率": 98.23, "中正率": 56.45, "内容风险严重度": 50.16, "品牌归属明确度": 49.43, "信息平衡程度": 63.43, "风险表达强度": 65.77}], "heatmapData": [{"category": "品牌类意图", "品牌提及率": 98.89, "中正率": 52.09, "内容风险严重度": 43.55, "品牌归属明确度": 41.59, "信息平衡程度": 64.15, "风险表达强度": 62.47}, {"category": "品类意图", "品牌提及率": 50.57, "中正率": 52.73, "内容风险严重度": 44.21, "品牌归属明确度": 56.05, "信息平衡程度": 56.07, "风险表达强度": 60.15}, {"category": "小森林产品类意图", "品牌提及率": 95.95, "中正率": 49.32, "内容风险严重度": 41.81, "品牌归属明确度": 38.66, "信息平衡程度": 59.13, "风险表达强度": 60.89}, {"category": "竞对类意图", "品牌提及率": 98.31, "中正率": 56.39, "内容风险严重度": 50.04, "品牌归属明确度": 49.34, "信息平衡程度": 63.45, "风险表达强度": 65.74}], "bottom10Intents": [{"intent": "经济参考报报道的纸尿裤甲酰胺事件详情是什么？", "category": "品类意图", "avg": 37.49, "brandMention": 100.0, "count": 4}, {"intent": "好奇小森林甲酰胺事件是怎么回事？", "category": "小森林产品类意图", "avg": 37.78, "brandMention": 100.0, "count": 4}, {"intent": "好奇纸尿裤甲酰胺风波反转了是怎么回事？", "category": "品牌类意图", "avg": 38.01, "brandMention": 100.0, "count": 4}, {"intent": "好奇小森林纸尿裤被曝检出甲酰胺是真的吗？", "category": "小森林产品类意图", "avg": 38.22, "brandMention": 99.08, "count": 4}, {"intent": "纸尿裤甲酰胺风波五连反转是什么情况？", "category": "品类意图", "avg": 38.68, "brandMention": 100.0, "count": 4}, {"intent": "好奇小森林纸尿裤有没有有害物质？", "category": "小森林产品类意图", "avg": 38.72, "brandMention": 93.75, "count": 4}, {"intent": "好奇小森林纸尿裤安全事件到底怎么回事？", "category": "小森林产品类意图", "avg": 39.04, "brandMention": 100.0, "count": 4}, {"intent": "纸尿裤甲酰胺风波反转了是怎么回事？", "category": "品类意图", "avg": 39.28, "brandMention": 100.0, "count": 4}, {"intent": "好奇纸尿裤安全事件到底怎么回事？", "category": "品牌类意图", "avg": 39.6, "brandMention": 100.0, "count": 4}, {"intent": "好奇纸尿裤被曝检出甲酰胺是真的吗？", "category": "品牌类意图", "avg": 40.18, "brandMention": 100.0, "count": 4}], "top10Intents": [{"intent": "好奇纸尿裤检测报告在哪里可以看？", "category": "品牌类意图", "avg": 94.99, "brandMention": 99.08, "count": 4}, {"intent": "哪些纸尿裤通过了第三方安全检测？", "category": "品类意图", "avg": 86.38, "brandMention": 77.65, "count": 4}, {"intent": "好奇小森林纸尿裤检测报告在哪里可以看？", "category": "小森林产品类意图", "avg": 84.59, "brandMention": 98.38, "count": 4}, {"intent": "好奇和雀氏哪个甲酰胺检测结果更好？", "category": "竞对类意图", "avg": 79.54, "brandMention": 88.88, "count": 4}, {"intent": "纸尿裤有没有质检报告可以查？", "category": "品类意图", "avg": 75.56, "brandMention": 43.88, "count": 4}, {"intent": "好奇纸尿裤复检结果出来了吗？", "category": "品牌类意图", "avg": 74.66, "brandMention": 100.0, "count": 4}, {"intent": "好奇纸尿裤有第三方检测报告吗？", "category": "品牌类意图", "avg": 70.54, "brandMention": 99.15, "count": 4}, {"intent": "好奇和帮宝适哪个复检结果更好？", "category": "竞对类意图", "avg": 69.92, "brandMention": 93.18, "count": 4}, {"intent": "好奇和Babycare哪个第三方检测更安全？", "category": "竞对类意图", "avg": 69.09, "brandMention": 96.3, "count": 4}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "avg": 68.45, "brandMention": 93.55, "count": 4}], "intentDetailData": [{"intent": "含甲酰胺的纸尿裤长期使用有什么后果？", "category": "品类意图", "date": "2026-08-06", "platform": "DeepSeek", "品牌提及率": 0.0, "中正率": 51.34, "内容风险严重度": 39.7, "品牌归属明确度": 63.2, "信息平衡程度": 57.2, "风险表达强度": 52.53}, {"intent": "含甲酰胺的纸尿裤长期使用有什么后果？", "category": "品类意图", "date": "2026-08-06", "platform": "豆包", "品牌提及率": 0.0, "中正率": 43.15, "内容风险严重度": 30.25, "品牌归属明确度": 58.0, "信息平衡程度": 48.75, "风险表达强度": 43.88}, {"intent": "含甲酰胺的纸尿裤长期使用有什么后果？", "category": "品类意图", "date": "2026-08-06", "platform": "通义千问", "品牌提及率": 22.2, "中正率": 39.92, "内容风险严重度": 27.3, "品牌归属明确度": 54.67, "信息平衡程度": 44.89, "风险表达强度": 41.04}, {"intent": "含甲酰胺的纸尿裤长期使用有什么后果？", "category": "品类意图", "date": "2026-08-06", "platform": "元宝", "品牌提及率": 37.5, "中正率": 47.98, "内容风险严重度": 32.5, "品牌归属明确度": 61.0, "信息平衡程度": 54.0, "风险表达强度": 54.5}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "date": "2026-08-06", "platform": "DeepSeek", "品牌提及率": 100.0, "中正率": 91.0, "内容风险严重度": 89.73, "品牌归属明确度": 90.53, "信息平衡程度": 94.6, "风险表达强度": 89.17}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "date": "2026-08-06", "platform": "豆包", "品牌提及率": 85.7, "中正率": 58.67, "内容风险严重度": 53.57, "品牌归属明确度": 58.86, "信息平衡程度": 58.29, "风险表达强度": 67.86}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "date": "2026-08-06", "platform": "通义千问", "品牌提及率": 88.5, "中正率": 71.77, "内容风险严重度": 68.15, "品牌归属明确度": 68.46, "信息平衡程度": 74.0, "风险表达强度": 78.65}, {"intent": "哪些纸尿裤不含甲酰胺？", "category": "品类意图", "date": "2026-08-06", "platform": "元宝", "品牌提及率": 100.0, "中正率": 52.37, "内容风险严重度": 46.38, "品牌归属明确度": 46.0, "信息平衡程度": 54.75, "风险表达强度": 66.25}]};
 
@@ -2596,6 +2624,10 @@ function setupTimeFilter() {
         dateStart.value = minDate;
         dateEnd.value = maxDate;
         updateAll();
+  // 隐藏加载提示
+  const loadingEl = document.getElementById('page-loading');
+  if (loadingEl) { loadingEl.style.opacity = '0'; setTimeout(() => loadingEl.remove(), 350); }
+
       } else if (range === '7d') {
         // 最近 7 天 = 最后 7 天
         state.startDate = allDates[allDates.length - 7];
